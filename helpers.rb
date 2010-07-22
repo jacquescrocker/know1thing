@@ -8,7 +8,7 @@ module FrankHelpers
     result = []
     Pathname.new(File.dirname(__FILE__)).join("dynamic", "slidedeck").children.each do |child|
       slide_name = child.basename.to_s.gsub("_", "").gsub(".erb", "").gsub(".haml", "")
-      result << render_partial("slides/#{slide_name}", :slide_name => slide_name)
+      result << render_partial("slidedeck/#{slide_name}", :slide_name => slide_name)
     end
     result.join("\n")
   end
