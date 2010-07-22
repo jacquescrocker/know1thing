@@ -1,3 +1,8 @@
+/* A font by Jos Buivenga (exljbris) -> http://www.exljbris.nl */
+@font-face { font-family: 'Museo300'; src: url(../fonts/Museo300-Regular.otf); }
+@font-face { font-family: 'Museo500'; src: url(../fonts/Museo500-Regular.otf); }
+@font-face { font-family: 'Museo700'; src: url(../fonts/Museo700-Regular.otf); }
+
 .notes { display: none; }
 .stroke {
   -webkit-text-stroke-color: red;
@@ -47,10 +52,7 @@ body {
   left: 50%;
   top: 50%;
   margin-top: -350px;
-  background-color: #eee;
-  background: -webkit-gradient(linear, left bottom, left top, from(#bbd), to(#fff));
-  background: -moz-linear-gradient(bottom, #bbd, #fff);
-  background: linear-gradient(bottom, #bbd, #fff);
+  background: #fff;
   -webkit-transition: margin 0.25s ease-in-out;
   -moz-transition: margin 0.25s ease-in-out;
   -o-transition: margin 0.25s ease-in-out;
@@ -61,7 +63,13 @@ body {
   -khtml-border-radius: 20px;
   -webkit-border-top-left-radius: 20px;
   -webkit-border-bottom-right-radius: 20px;
+}
 
+.slide.goog {
+  background-color: #eee;
+  background: -webkit-gradient(linear, left bottom, left top, from(#bbd), to(#fff));
+  background: -moz-linear-gradient(bottom, #bbd, #fff);
+  background: linear-gradient(bottom, #bbd, #fff);
 }
 
 .slide p {
@@ -339,15 +347,44 @@ info {
   text-align: center;
 }
 
-/* Fonts */
-@font-face { font-family: 'Museo300'; src: url(../fonts/Museo300-Regular.otf); }
-@font-face { font-family: 'Museo700'; src: url(../fonts/Museo700-Regular.otf); }
-
 /* hide counter */
 .slide .counter {
   display: none;
 }
 
+
+/* COVER slide */
+.slide.cover {
+  text-align: center;
+}
+.slide.cover * {
+  font-family: Museo500;
+}
+.slide.cover h1 {
+  font-size: 48pt;
+  margin-top: 80px;
+  display: block;
+}
+.slide.cover h2 {
+  font-size: 36pt;
+  margin-top: 10px;
+  margin-bottom: -10px;
+}
+.slide.cover h3 {
+  font-size: 60pt;
+}
+.slide.cover a {
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+.slide.cover p {
+  font-weight: bold;
+  font-size: 12pt;
+}
+
+
+/* KNOW slide */
 .slide.know {
   background: #fff;
 }
