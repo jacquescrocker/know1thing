@@ -8,7 +8,7 @@
 server:
   handler: mongrel
   hostname: 0.0.0.0
-  port: 3000
+  port: 4000
 
 # ----------------------
 #  Static folder:

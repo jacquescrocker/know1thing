@@ -1,6 +1,10 @@
 module FrankHelpers
 
-  def render_slides
+  def partial(*args)
+    render_partial(*args)
+  end
+
+  def slides
     result = []
     Pathname.new(File.dirname(__FILE__)).join("dynamic", "slides").children.each do |child|
       slide_name = child.basename.to_s.gsub("_", "").gsub(".erb", "").gsub(".haml", "")
