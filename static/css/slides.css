@@ -135,11 +135,6 @@ body.three-d div.slides {
   transform: translateX(50px) scale(0.8) rotateY(10deg);
 }
 
-/* Content */
-
-@font-face { font-family: 'Junction'; src: url(src/Junction02.otf); }
-@font-face { font-family: 'LeagueGothic'; src: url(src/LeagueGothic.otf); }
-
 header {
   font-family: 'Droid Sans';
   font-weight: normal;
@@ -153,6 +148,14 @@ header {
   top: 25px;
   margin: 0;
   padding: 0;
+  z-index: 1;
+}
+
+details {
+  font-size: 21px;
+  position: absolute;
+  right: 29px;
+  top: 26px;
 }
 
 h1 {
@@ -187,7 +190,14 @@ section, footer {
   overflow: hidden;
 }
 
-footer { font-size: 12px; margin-top: 20px;}
+footer {
+  position: absolute;
+  line-height: 1.2em;
+  bottom: 16px;
+  left: 24px;
+  font-size: 16px;
+  background-color: #fff;
+}
 
 a {
   color: inherit;
@@ -314,57 +324,6 @@ video {
   border: 1px solid rgba(0, 0, 0, 0.2);
 }
 
-.css,
-.js,
-.html,
-.key {
-  font-family: 'Droid Sans';
-  color: black;
-  display: inline-block;
-  padding: 6px 10px 3px 10px;
-  font-size: 25px;
-  line-height: 30px;
-  text-shadow: none;
-  letter-spacing: 0;
-  bottom: 10px;
-  position: relative;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
-  -khtml-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  background: white;
-  box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
-  -webkit-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
-  -moz-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
-  -o-box-shadow: rgba(0, 0, 0, 0.1) 0 2px 5px;
-}
-
-.key { font-family: Arial; }
-
-:not(header) > .css,
-:not(header) > .js,
-:not(header) > .html,
-:not(header) > .key {
-  margin: 0 5px;
-  bottom: 4px;
-}
-
-.css {
-  background: -webkit-gradient(linear, left top, left bottom, from(#ff4), to(#ffa));
-  background-color: #ff4;
-  background: -moz-linear-gradient(left top, #ff4, #ffa);
-}
-.js {
-  background: -webkit-gradient(linear, left top, left bottom, from(#4f4), to(#afa));
-  background-color: #4f4;
-  background: -moz-linear-gradient(left top, #4f4, #afa);
-}
-.html {
-  background: -webkit-gradient(linear, left top, left bottom, from(#e88), to(#fee));
-  background-color: #e88;
-  background: -moz-linear-gradient(left top, #e88, #fee);
-}
-
 li {
   list-style: none;
   padding: 10px 0;
@@ -378,4 +337,67 @@ info {
   display: block;
   font-size: 50%;
   text-align: center;
+}
+
+/* Fonts */
+@font-face { font-family: 'Museo300'; src: url(../fonts/Museo300-Regular.otf); }
+@font-face { font-family: 'Museo700'; src: url(../fonts/Museo700-Regular.otf); }
+
+/* hide counter */
+.slide .counter {
+  display: none;
+}
+
+.slide.know {
+  background: #fff;
+}
+
+.slide.know > hr {
+  background-color:black;
+  border:1px solid black;
+  height:0;
+  position:absolute;
+  top:57px;
+  width:100%;
+  z-index:0;
+}
+
+.slide.know > hr.vert {
+  left:37px;
+  height:100%;
+  width: 0px;
+  top: -7px;
+}
+
+
+.slide.know header {
+  font-family: Museo700;
+  font-size: 48pt;
+  text-spacing: 10px;
+  letter-spacing: 2px;
+  word-spacing: 10px;
+
+  background-color:#006838;
+  border:4px solid black;
+  left:21px;
+  padding:0 24px;
+  top:21px;
+}
+
+.slide.know details {
+  font-family: Museo300;
+  font-size: 18pt;
+  top: 42px;
+}
+
+.slide.know section {
+  margin-left: 6px;
+  margin-top: 120px;
+}
+
+.slide.know section p {
+  line-height: 30px;
+  margin: 20px 50px;
+  font-size: 16px;
+  line-height: 1.5em;
 }
