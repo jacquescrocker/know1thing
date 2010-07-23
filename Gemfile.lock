@@ -1,0 +1,23 @@
+GEM
+  specs:
+    cgi_multipart_eof_fix (2.5.0)
+    daemons (1.1.0)
+    fastthread (1.0.7)
+    frank (0.3.2)
+      haml (>= 2.0)
+      mongrel (>= 1.0)
+      rack (>= 1.0)
+    gem_plugin (0.2.3)
+    haml (3.0.13)
+    mongrel (1.1.5)
+      cgi_multipart_eof_fix (>= 2.4)
+      daemons (>= 1.0.3)
+      fastthread (>= 1.0.1)
+      gem_plugin (>= 0.2.3)
+    rack (1.2.1)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  frank
