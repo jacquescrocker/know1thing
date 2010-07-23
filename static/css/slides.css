@@ -198,21 +198,12 @@ section, footer {
   overflow: hidden;
 }
 
-footer {
-  position: absolute;
-  line-height: 1.2em;
-  bottom: 16px;
-  left: 24px;
-  font-size: 16px;
-  background-color: #fff;
-}
-
 a {
   color: inherit;
   display: inline-block;
   text-decoration: none;
   line-height: 110%;
-  border-bottom: 2px solid #3f3f3f;
+  border-bottom: 1px solid #3f3f3f;
 }
 
 #wmap a {
@@ -367,8 +358,8 @@ info {
 }
 .slide.cover h2 {
   font-size: 36pt;
-  margin-top: 10px;
-  margin-bottom: -10px;
+  margin-top: 23px;
+  margin-bottom: -24px;
 }
 .slide.cover h3 {
   font-size: 60pt;
@@ -376,6 +367,7 @@ info {
 .slide.cover a {
   font-weight: bold;
   font-size: 12pt;
+  border-bottom-width: 4px;
 }
 
 .slide.cover p {
@@ -437,4 +429,14 @@ info {
   margin: 20px 50px;
   font-size: 16px;
   line-height: 1.5em;
+}
+
+.slide.know footer {
+  position: absolute;
+  font-style: italic;
+  line-height: 1.2em;
+  bottom: 16px;
+  left: 24px;
+  font-size: 13px;
+  background-color: #fff;
 }
