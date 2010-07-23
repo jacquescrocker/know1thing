@@ -27,7 +27,7 @@ body {
   top: 0px;
   display: block;
   overflow: hidden;
-  background: #778;
+  background: #1D1E21 url("bg.png") ;
 }
 
 .slides {
