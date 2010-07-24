@@ -72,10 +72,6 @@ body {
   background: linear-gradient(bottom, #bbd, #fff);
 }
 
-.slide p {
-  font-size: 20px;
-}
-
 .slide .counter {
   color: #999999;
   position: absolute;
@@ -422,21 +418,37 @@ info {
 .slide.know section {
   margin-left: 6px;
   margin-top: 120px;
+  font-size: 12pt;
 }
 
 .slide.know section p {
   line-height: 30px;
   margin: 20px 50px;
-  font-size: 16px;
   line-height: 1.5em;
+}
+
+.slide.know section ul {
+  margin-left:30px;
+  font-size:14px;
 }
 
 .slide.know footer {
   position: absolute;
   font-style: italic;
-  line-height: 1.2em;
+  line-height: 1.5em;
   bottom: 16px;
   left: 24px;
+  padding-left: 5px;
   font-size: 13px;
   background-color: #fff;
+}
+
+.slide.know footer.right {
+  height:106px;
+  left:auto;
+  right:-3px;
+  text-align:right;
+  bottom:-20px;
+  width:259px;
+  background: none;
 }

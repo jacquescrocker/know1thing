@@ -3,16 +3,33 @@
     font-size:40pt;
     text-align:center;
     background-color:#41387A;
+    color:#fff;
   }
-  #andrus5 header span {
+  #andrus5 header span.first {
+    vertical-align: 20px;
+  }
+  #andrus5 header span.mid {
     font-size:20pt;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    vertical-align: 18px;
+    margin:0 -23px 0 -30px;
   }
+  #andrus5 header span.last {
+    vertical-align: -6px;
+  }
+  #andrus5 section p {
+    font-size: 12pt;
+  }
+
 </style>
 
 <div id="andrus5" class="slide know" data-slidename="<%= slide_name %>">
   <hr /><hr class="vert"/>
   <header>
-    Mistakes <span>are</span> Valuable
+    <span class="first">Mistakes</span>
+    <span class="mid">are</span>
+    <span class="last">Valuable</span>
   </header>
   <details>
     By Beth Andrus
