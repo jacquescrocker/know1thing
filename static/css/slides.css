@@ -340,38 +340,6 @@ info {
 }
 
 
-/* COVER slide */
-.slide.cover {
-  text-align: center;
-}
-.slide.cover * {
-  font-family: Museo500;
-}
-.slide.cover h1 {
-  font-size: 48pt;
-  margin-top: 80px;
-  display: block;
-}
-.slide.cover h2 {
-  font-size: 36pt;
-  margin-top: 23px;
-  margin-bottom: -24px;
-}
-.slide.cover h3 {
-  font-size: 60pt;
-}
-.slide.cover a {
-  font-weight: bold;
-  font-size: 12pt;
-  border-bottom-width: 4px;
-}
-
-.slide.cover p {
-  font-weight: bold;
-  font-size: 12pt;
-}
-
-
 /* KNOW slide */
 .slide.know {
   background: #fff;
