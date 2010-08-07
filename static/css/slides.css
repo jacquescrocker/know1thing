@@ -185,8 +185,8 @@ h2:first-child {
 section, footer {
   font-family: 'Droid Sans';
   font-size: 50px;
-  color: #3f3f3f;
-  text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;
+  color: #000;
+  /*text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;*/
   margin-left: 30px;
   margin-right: 30px;
   margin-top: 100px;
