@@ -1,23 +1,32 @@
+GIT
+  remote: http://github.com/blahed/frank.git
+  revision: 2a7c52a
+  branch: 0.4.x
+  specs:
+    frank (0.4.0)
+      haml (>= 3.0)
+      mongrel (>= 1.0)
+      rack (>= 1.0)
+      tilt (= 0.9)
+
 GEM
+  remote: http://rubygems.org/
   specs:
     cgi_multipart_eof_fix (2.5.0)
     daemons (1.1.0)
     fastthread (1.0.7)
-    frank (0.3.2)
-      haml (>= 2.0)
-      mongrel (>= 1.0)
-      rack (>= 1.0)
     gem_plugin (0.2.3)
-    haml (3.0.13)
+    haml (3.0.16)
     mongrel (1.1.5)
       cgi_multipart_eof_fix (>= 2.4)
       daemons (>= 1.0.3)
       fastthread (>= 1.0.1)
       gem_plugin (>= 0.2.3)
     rack (1.2.1)
+    tilt (0.9)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
-  frank
+  frank!
