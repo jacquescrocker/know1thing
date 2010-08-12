@@ -374,9 +374,16 @@
 
         // Initialize
         var slideshow = new SlideShow(query(".slide"));
+
+        query(".next").forEach(function(el) {
+          el.addEventListener('click', function(e) { slideshow.next() }, false);
+        });
+        query(".prev").forEach(function(el) {
+          el.addEventListener('click', function(e) { slideshow.prev() }, false);
+        });
+
       })();
     </script>
-
 
     <!-- CHROME FRAME -->
     <!--[if lt IE 9]>
