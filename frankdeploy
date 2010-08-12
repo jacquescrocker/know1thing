@@ -5,7 +5,6 @@ rm -Rf ~/Sites/know1thing_deploy
 mkdir -p ~/Sites
 
 # setup bundler
-bundle
 bundle exec frankout --production ~/Sites/know1thing_deploy
 
 cd ~/Sites/know1thing_deploy
