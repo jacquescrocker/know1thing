@@ -342,6 +342,7 @@ info {
 
 .slide.know > hr {
   background-color: #eae6dd;
+  background-image: url(sidebar_bg_filter.png);
   border:0px;
   position:absolute;
   z-index:0;
@@ -401,6 +402,7 @@ info {
 
   color: #fff !important;
   background-color:#19a1b9 !important;
+  background-image: url(title_bg_filter.png) !important;
 
   box-shadow: 6px 5px 0 rgba(0,0,0,0.2);
   -webkit-box-shadow: 6px 5px 0 rgba(0,0,0,0.2);
