@@ -34,6 +34,37 @@
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
 
     <link type="text/css" href="./css/slides.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+      <style type="text/css" media="screen">
+        #cover {
+          display: block;
+          margin: auto;
+          visibility: visible;
+          position: static;
+          padding-top: 100px
+        }
+        .presentation {
+          background: none !important;
+          background-color: #fff !important;
+        }
+
+        #cover a {
+          border-bottom: none;
+          text-decoration: underline;
+        }
+        #cover .start {
+          padding-top: 20px;
+        }
+        #cover .start .download {
+          float: none;
+          margin: 0 auto;
+          cursor: pointer;
+        }
+        #cover .start .next {
+          display: none;
+        }
+      </style>
+    <![endif]-->
 
   </head>
   <body>
@@ -243,7 +274,7 @@
             }
             removeClass(this._buildList.shift(), "to-build");
             return true;
-          },
+          }
         };
 
         //
@@ -369,7 +400,7 @@
             } else if (delta< -SWIPE_SIZE) {
               this.prev();
             }
-          },
+          }
         };
 
         // Initialize
