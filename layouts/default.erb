@@ -466,6 +466,29 @@
             });
           })
 
+          $(".tweet").click(function(e) {
+            e.preventDefault();
+
+            var url = $(this).attr("href");
+
+            var Z = 550,
+            h = 450;
+            var c = screen.height;
+            var b = screen.width;
+            var a = Math.round((b / 2) - (Z / 2));
+            var g = 0;
+            if (c > h) {
+                g = Math.round((c / 2) - (h / 2))
+            }
+
+            var tweetWindow = window.open(url, "twitter_tweet", "left=" + a + ",top=" + g + ",width=" + Z + ",height=" + h + ",personalbar=no,toolbar=no,scrollbars=yes,location=yes,resizable=yes");
+            if (tweetWindow) {
+                tweetWindow.focus()
+            } else {
+                window.location.href = Y
+            }
+          })
+
         })();
       </script>
 
@@ -484,6 +507,5 @@
       })();
 
     </script>
-    <script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
   </body>
 </html>
