@@ -487,18 +487,6 @@ info {
   -moz-border-radius-bottomright: 15px;
 }
 
-.slide.know nav .title {
-  text-indent: -99999px;
-  background-image: url(title.png);
-  background-repeat: no-repeat;
-  float: left;
-  margin: 17px 0;
-  margin-left: 175px;
-
-  width: 344px;
-  height: 25px;
-
-}
 
 .slide.know nav a {
   border: 0;
@@ -509,6 +497,18 @@ info {
   display: block;
   top: 11px;
   outline:none;
+}
+
+.slide.know nav .title {
+  text-indent: -99999px;
+  background-image: url(title.png);
+  background-repeat: no-repeat;
+  left: 175px;
+  top: 16px;
+
+  width: 344px;
+  height: 25px;
+
 }
 
 .slide.know nav a.prev, .slide.know nav a.next  {

@@ -196,8 +196,9 @@
           //
           // Slide class
           //
-          var Slide = function(node, idx) {
+          var Slide = function(node, idx, slideName) {
             this._node = node;
+            this._name = slideName;
             if (idx >= 0) {
               this._count = idx+1;
             }
@@ -210,6 +211,7 @@
 
           Slide.prototype = {
             _node: null,
+            _name: "",
             _count: 0,
             _buildList: [],
             _visited: false,
@@ -297,15 +299,18 @@
           //
           // SlideShow class
           //
-          var SlideShow = function(slides) {
+          var SlideShow = function(slides, numberToName, nameToNumber) {
             this._slides = (slides||[]).map(function(el, idx) {
-              return new Slide(el, idx);
+              return new Slide(el, idx, numberToName[idx]);
             });
-
+            this.numberToName = numberToName;
+            this.nameToNumber = nameToNumber;
             var h = window.location.hash;
             try {
-              this.current = parseInt(h.split('#slide')[1], 10);
+              var slideHash = h.split('#')[1];
+              this.current = nameToNumber[slideHash];
             }catch (e) { /* squeltch */ }
+
             this.current = isNaN(this.current) ? 1 : this.current;
             var _t = this;
             doc.addEventListener('keydown',
@@ -328,10 +333,10 @@
             _update: function(dontPush) {
               if (history.pushState) {
                 if (!dontPush) {
-                  history.pushState(this.current, "Slide " + this.current, "#slide" + this.current);
+                  history.pushState(this.current, "Slide " + this.current, "#" + this.numberToName[this.current]);
                 }
               } else {
-                window.location.hash = "slide" + this.current;
+                window.location.hash = this.numberToName[this.current];
               }
               for (var x = this.current-1; x < this.current+7; x++) {
                 if (this._slides[x-4]) {
@@ -341,6 +346,8 @@
             },
 
             current: 0,
+            nameToNumber: {},
+            numberToName: {},
             next: function() {
               if (!this._slides[this.current-1].buildNext()) {
                 this.current = Math.min(this.current+1, this._slides.length);
@@ -353,7 +360,7 @@
             },
             go: function(num) {
               if (history.pushState && this.current != num) {
-                history.replaceState(this.current, "Slide " + this.current, "#slide" + this.current);
+                history.replaceState(this.current, "Slide " + this.current, "#" + this.numberToName[this.current]);
               }
               this.current = num;
               this._update(true);
@@ -420,17 +427,44 @@
             }
           };
 
-          // Initialize
-          var slideshow = new SlideShow(query(".slide"));
+          var numberToName = {};
+          var nameToNumber = {};
+          $(".slide").each(function(index) {
+            numberToName[index+1] = $(this).attr("data-slidename");
+            nameToNumber[$(this).attr("data-slidename")] = index+1;
+          });
 
-          $(".next").click(function(e) {
+          // Initialize
+          var slideshow = new SlideShow(query(".slide"), numberToName, nameToNumber);
+
+          $(".next").each(function() {
+            var self = $(this);
+
+            // set href hash tag
+            self.attr("href", "#"+ self.parents(".slide:first").nextAll(".slide:first").attr("data-slidename"))
+
+            self.click(function(e) {
+              e.preventDefault();
+              slideshow.next();
+            });
+          })
+
+          $(".home").click(function(e) {
             e.preventDefault();
-            slideshow.next();
-          });
-          $(".prev").click(function(e) {
-            e.preventDefault();
-            slideshow.prev();
-          });
+            slideshow.go(1);
+          })
+
+          $(".prev").each(function(e) {
+            var self = $(this);
+
+            // set href hash tag
+            self.attr("href", "#"+ self.parents(".slide:first").prevAll(".slide:first").attr("data-slidename"))
+
+            self.click(function(e) {
+              e.preventDefault();
+              slideshow.prev();
+            });
+          })
 
         })();
       </script>
