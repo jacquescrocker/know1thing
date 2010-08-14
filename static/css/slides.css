@@ -1,7 +1,7 @@
 /* A font by Jos Buivenga (exljbris) -> http://www.exljbris.nl */
-@font-face { font-family: 'Museo300'; src: url(../fonts/Museo300-Regular.otf); }
+/*@font-face { font-family: 'Museo300'; src: url(../fonts/Museo300-Regular.otf); }
 @font-face { font-family: 'Museo500'; src: url(../fonts/Museo500-Regular.otf); }
-@font-face { font-family: 'Museo700'; src: url(../fonts/Museo700-Regular.otf); }
+@font-face { font-family: 'Museo700'; src: url(../fonts/Museo700-Regular.otf); }*/
 
 .notes { display: none; }
 
@@ -135,7 +135,6 @@ body.three-d div.slides {
 }
 
 header {
-  font-family: 'Droid Sans';
   font-weight: normal;
   font-size: 50px;
   letter-spacing: -.05em;
@@ -166,7 +165,6 @@ h1 {
 }
 
 h2 {
-  font-family: 'Droid Sans';
   color: black;
   font-size: 20px;
   margin-left: 20px;
@@ -178,7 +176,9 @@ h2:first-child {
 }
 
 section, footer {
-  font-family: 'Droid Sans';
+  font-family: "museo-1","museo-2", serif;
+  font-weight: 500;
+
   font-size: 50px;
   color: #000;
   /*text-shadow: rgba(0, 0, 0, 0.2) 0 2px 5px;*/
@@ -394,7 +394,10 @@ info {
 
 /* HEADER */
 .slide.know header {
-  font-family: Museo700;
+  /*font-family: Museo700;*/
+  font-family: "museo-1","museo-2", serif;
+  font-weight: 700;
+
   font-size: 31pt;
   text-spacing: 10px;
   letter-spacing: 2px;
@@ -415,7 +418,9 @@ info {
 
 /* DETAILS */
 .slide.know details {
-  font-family: Museo300;
+  /*font-family: Museo300;*/
+  font-family: "museo-1","museo-2", serif;
+  font-weight: 300;
   font-size: 18pt;
   top: 42px;
 }
@@ -457,6 +462,8 @@ info {
   padding: 14px 0;
   background-image: url(about_bg.png);
   background-repeat: repeat-x;
+  background-color: #fff;
+
 }
 
 .slide.know footer.right {
