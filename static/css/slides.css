@@ -423,7 +423,7 @@ info {
 /* SECTION */
 .slide.know section {
   margin-left: 6px;
-  margin-top: 120px;
+  margin-top: 104px;
   font-size: 12pt;
 }
 
@@ -443,11 +443,20 @@ info {
   position: absolute;
   font-style: italic;
   line-height: 1.5em;
-  bottom: 16px;
-  left: 56px;
-  padding-left: 5px;
+  bottom: 58px;
+  left: 0;
   font-size: 13px;
-  background-color: #fff;
+
+  margin: 0;
+  padding: 0;
+  width: 100%;
+}
+
+.slide.know footer .about {
+  margin: 0 37px 0 90px;
+  padding: 14px 0;
+  background-image: url(about_bg.png);
+  background-repeat: repeat-x;
 }
 
 .slide.know footer.right {
