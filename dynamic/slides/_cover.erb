@@ -5,6 +5,25 @@
   background-repeat: none;
 }
 
+#cover .top {
+  margin: 20px 30px;
+  background-image: url(css/about_bg.png);
+  background-repeat: repeat-x;
+  background-position: 0px 12px;
+}
+
+#cover .intro {
+  font-family: "museo-1","museo-2";
+  font-weight: 300;
+  color: #86685f;
+  background-color: #f0ece6;
+  padding: 5px 16px;
+  font-size: 15pt;
+  text-shadow: 1px 1px 0px #fff;
+  margin: 0;
+  display: inline;
+}
+
 #cover .download {
   background-image: url(css/download_btn.jpg);
   background-repeat: none;
@@ -33,14 +52,15 @@
   top: 216px;
 
   outline: none;
-
 }
-
-
-
-
 </style>
+
 <div id="cover" class="slide" data-slidename="cover">
+
+  <div class="top">
+    <p class="intro">30 leaders. 1 page each. Enjoy.</p>
+  </div>
+
   <a href="./If-I-would-have-known-just-1-thing.pdf" class="download">Download PDF</a>
   <a href="#mac" class="next">Download PDF</a>
 </div>

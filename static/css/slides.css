@@ -559,3 +559,14 @@ info {
 .slide.know nav a.tweet:hover {
   background-position: 0 -16px;
 }
+
+.typekit-badge {
+  left: 0 !important;
+  top: 0 !important;
+  bottom: 0 !important;
+  transform: rotate(-90deg);
+  -moz-transform: rotate(-90deg);
+  -webkit-transform: rotate(-90deg);
+  margin: auto 0 !important;
+  margin-left: -18px !important;
+}
