@@ -3,5 +3,14 @@
   <a href="#" class="prev">Previous Slide</a>
   <a href="#" class="next">Next Slide</a>
   <a href="#" class="tweet">Tweet this Slide</a>
+
+  <a href="http://twitter.com/share" class="twitter-share-button"
+    data-url="http://ifiwouldhaveknownjustonething.com#<%= slide %>"
+    data-text="If I would have known just one thing... (by <%= author_name %>)"
+    data-count="horizontal"
+    <% if defined?(author_twitter) %>
+      data-via="<%= author_twitter %>"
+    <% end %>
+    data-related="sayhellothere">Tweet</a>
 </nav>
 
