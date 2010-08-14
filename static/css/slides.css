@@ -521,7 +521,7 @@ info {
   background-image: url(prev.png);
 }
 .slide.know nav a.prev:hover {
-  background-image: url(prev-hover.png);
+  background-position: 0 -36px;
 }
 
 .slide.know nav a.next {
@@ -529,7 +529,7 @@ info {
   background-image: url(next.png);
 }
 .slide.know nav a.next:hover {
-  background-image: url(next-hover.png);
+  background-position: 0 -36px;
 }
 
 .slide.know nav a.tweet {
@@ -540,5 +540,5 @@ info {
   background-image: url(tweet.png);
 }
 .slide.know nav a.tweet:hover {
-  background-image: url(tweet-hover.png);
+  background-position: 0 -16px;
 }
