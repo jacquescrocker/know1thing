@@ -494,6 +494,26 @@ info {
   -moz-border-radius-bottomright: 15px;
 }
 
+.slide.know nav .title {
+  border: 0;
+
+  background-repeat: none;
+  text-indent: -99999px;
+  position: absolute;
+  display: block;
+  top: 11px;
+  outline:none;
+
+  text-indent: -99999px;
+  background-image: url(title.png);
+  background-repeat: no-repeat;
+  left: 175px;
+  top: 16px;
+
+  width: 344px;
+  height: 25px;
+
+}
 
 .slide.know nav a {
   border: 0;
@@ -506,17 +526,7 @@ info {
   outline:none;
 }
 
-.slide.know nav .title {
-  text-indent: -99999px;
-  background-image: url(title.png);
-  background-repeat: no-repeat;
-  left: 175px;
-  top: 16px;
 
-  width: 344px;
-  height: 25px;
-
-}
 
 .slide.know nav a.prev, .slide.know nav a.next  {
   width: 147px;
