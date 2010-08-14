@@ -323,8 +323,11 @@
                 function(e) { _t.handleTouchStart(e); }, false);
             doc.addEventListener('touchend',
                 function(e) { _t.handleTouchEnd(e); }, false);
-            window.addEventListener('popstate',
-                function(e) { _t.go(e.state); }, false);
+
+            window.addEventListener('popstate', function(e) {
+              _t.go(e.state);
+            }, false);
+
             this._update();
           };
 
