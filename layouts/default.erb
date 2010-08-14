@@ -32,7 +32,6 @@
     <meta charset="utf-8" />
     <title>If I would have known just one thing...</title>
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
-
     <link type="text/css" href="./css/slides.css" rel="stylesheet">
 
 
@@ -86,6 +85,7 @@
     <%= yield %>
     <!--[if !IE]><!-->
 
+      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
       <script>
         (function() {
           var doc = document;
@@ -423,11 +423,13 @@
           // Initialize
           var slideshow = new SlideShow(query(".slide"));
 
-          query(".next").forEach(function(el) {
-            el.addEventListener('click', function(e) { slideshow.next() }, false);
+          $(".next").click(function(e) {
+            e.preventDefault();
+            slideshow.next();
           });
-          query(".prev").forEach(function(el) {
-            el.addEventListener('click', function(e) { slideshow.prev() }, false);
+          $(".prev").click(function(e) {
+            e.preventDefault();
+            slideshow.prev();
           });
 
         })();
