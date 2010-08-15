@@ -1,0 +1,107 @@
+<!--[if lt IE 9]>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script type="text/javascript" src="js/jquery.chrome_frame.js"></script>
+
+  <style type="text/css" media="screen">
+    html, body {
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+
+    }
+    html, body, .presentation, .slides {
+      overflow: visible;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 900px;
+      height: 700px;
+    }
+    #cover {
+      display: block;
+      margin: auto;
+      visibility: visible;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow: visible;
+      width: 900px;
+      height: 700px;
+    }
+
+    .slide {
+      display: none;
+    }
+    .presentation {
+      background: none !important;
+      background-color: #fff !important;
+    }
+
+    #cover .howto {
+      display: none;
+    }
+    #cover .share {
+      margin: auto;
+      left: 0;
+      right: 0;
+    }
+
+    #cover a {
+      border-bottom: none;
+      text-decoration: underline;
+    }
+    #cover .start {
+      padding-top: 20px;
+    }
+    #cover .start .download {
+      float: none;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    #cover .start .next {
+      display: none;
+    }
+
+    #cover .chromeframe {
+      display: block !important;
+      padding-top:20px;
+    }
+
+    #chrome_msg { display:none; position: fixed; top: 0; left: 0; background: #ece475; border: 2px solid #666; border-top: none; font: bold 11px Verdana, Geneva, Arial, Helvetica, sans-serif; line-height: 100%; width: 100%; text-align: center; padding: 5px 0; margin: 0 auto; }
+    #chrome_msg a, #chrome_msg a:link { color: #a70101; text-decoration: none; }
+    #chrome_msg a:hover { color: #a70101; text-decoration: underline; }
+    #chrome_msg a#msg_hide { float: right; margin-right: 15px; cursor: pointer; }
+    * html #chrome_msg { left: auto; margin: 0 auto; border-top: 2px solid #666;  }
+
+    .chromeFrameInstallDefaultStyle {
+      z-index: 9999;
+      position: absolute;
+      border: 5px solid #999;
+      width: 800px;
+      height: 400px;
+      left: 50px;
+      top: 150px;
+    }
+  </style>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $(".next").click(function(e){
+        e.preventDefault();
+
+        var confirmation = confirm("This slide show requires an HTML5 capable browser. You can just download the PDF, or we can help you install Chrome Frame. Click OK to continue the install, then restart the browser when you are done. (SORRY! It'll be worth it we promise!).");
+        if (confirmation) {
+            window.open('http://www.google.com/chromeframe/eula.html', 'CFWindow', 'menubar=no,width=800,height=450,toolbar=no,scrollbars=yes')
+        }
+
+      })
+    })
+  </script>
+
+<!-- <![endif]-->

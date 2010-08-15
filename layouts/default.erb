@@ -21,70 +21,34 @@
 -->
 <html>
   <head>
-    <!--[if gte IE 9]>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <![endif]-->
-
-    <!--[if lt IE 9]>
-      <meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1" />
-    <![endif]-->
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
 
     <meta charset="utf-8" />
     <title>If I would have known just one thing...</title>
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
     <link type="text/css" href="./css/slides.css" rel="stylesheet">
 
-
-    <!--[if lt IE 9]>
-      <style type="text/css" media="screen">
-        .presentation, .slides {
-          overflow: visible;
-          position: static;
-          height: auto;
-          width: auto;
-        }
-        #cover {
-          display: block;
-          margin: auto;
-          visibility: visible;
-          position: static;
-          padding-top: 100px;
-          overflow: visible;
-        }
-        .presentation {
-          background: none !important;
-          background-color: #fff !important;
-        }
-
-        #cover a {
-          border-bottom: none;
-          text-decoration: underline;
-        }
-        #cover .start {
-          padding-top: 20px;
-        }
-        #cover .start .download {
-          float: none;
-          margin: 0 auto;
-          cursor: pointer;
-        }
-        #cover .start .next {
-          display: none;
-        }
-
-        #cover .chromeframe {
-          display: block !important;
-          padding-top:20px;
-        }
-      </style>
-    <![endif]-->
+    <%= partial "slides/ie_bullshit" %>
 
     <script type="text/javascript" src="http://use.typekit.com/lyq7joq.js"></script>
     <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
   </head>
   <body>
     <%= yield %>
+
     <!--[if !IE]><!-->
+      <style type="text/css" media="screen">
+        .typekit-badge {
+          left: 0 !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -webkit-transform: rotate(-90deg);
+          margin: auto 0 !important;
+          margin-left: -18px !important;
+        }
+      </style>
 
       <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
       <script>
@@ -511,5 +475,6 @@
       })();
 
     </script>
+
   </body>
 </html>
