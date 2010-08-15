@@ -95,7 +95,7 @@
       $(".next").click(function(e){
         e.preventDefault();
 
-        var confirmation = confirm("This slide show requires an HTML5 capable browser. You can just download the PDF, or we can help you install Chrome Frame. Click OK to continue the install, then restart the browser when you are done. (SORRY! It'll be worth it we promise!).");
+        var confirmation = confirm("This slide show requires an HTML5 capable browser. You can just download the PDF, or we can help you install Chrome Frame. Click OK to continue the install, then restart the browser when you are done. (SORRY! It'll be worth it we promise!)");
         if (confirmation) {
             window.open('http://www.google.com/chromeframe/eula.html', 'CFWindow', 'menubar=no,width=800,height=450,toolbar=no,scrollbars=yes')
         }
