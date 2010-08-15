@@ -6,7 +6,7 @@ $(document).ready(function() {
       },
       preventPrompt: true,
       oninstall: function() {
-        alert("Chrome Frame is now Installed! Click OK to start the slide show");
+        alert("Chrome Frame is now installed! Click OK one more time to get started!");
         // window.location = "http://mac.dev:4000/?reload#mac";
         window.location = "http://ifiwouldhaveknownjustonething.com/?reload#mac"
       }
