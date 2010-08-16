@@ -18,4 +18,4 @@ git commit -am "regen"
 
 git push origin master:gh-pages --force
 
-cd $origdir
+cd '$origdir'
