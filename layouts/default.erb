@@ -289,9 +289,9 @@
             doc.addEventListener('touchend',
                 function(e) { _t.handleTouchEnd(e); }, false);
 
-            window.addEventListener('popstate', function(e) {
-              _t.go(e.state);
-            }, false);
+            // window.addEventListener('popstate', function(e) {
+            //   _t.go(e.state);
+            // }, false);
 
             this._update();
           };
@@ -317,7 +317,7 @@
             nameToNumber: {},
             numberToName: {},
             next: function() {
-              if (!this._slides[this.current-1].buildNext()) {
+              if (this._slides[this.current-1] && !this._slides[this.current-1].buildNext()) {
                 this.current = Math.min(this.current+1, this._slides.length);
                 this._update();
               }
@@ -403,6 +403,7 @@
           });
 
           // Initialize
+          console.log(query(".slide"))
           var slideshow = new SlideShow(query(".slide"), numberToName, nameToNumber);
 
           $(".next").each(function() {

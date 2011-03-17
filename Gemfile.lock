@@ -12,16 +12,12 @@ GIT
 GEM
   remote: http://rubygems.org/
   specs:
-    cgi_multipart_eof_fix (2.5.0)
-    daemons (1.1.0)
-    fastthread (1.0.7)
+    daemons (1.0.10)
     gem_plugin (0.2.3)
     haml (3.0.16)
-    mongrel (1.1.5)
-      cgi_multipart_eof_fix (>= 2.4)
-      daemons (>= 1.0.3)
-      fastthread (>= 1.0.1)
-      gem_plugin (>= 0.2.3)
+    mongrel (1.2.0.pre2)
+      daemons (~> 1.0.10)
+      gem_plugin (~> 0.2.3)
     rack (1.2.1)
     tilt (0.9)
 
@@ -30,3 +26,4 @@ PLATFORMS
 
 DEPENDENCIES
   frank!
+  mongrel (>= 1.2.0.pre2)
