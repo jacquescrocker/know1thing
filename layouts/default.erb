@@ -28,6 +28,7 @@
     <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
     <link type="text/css" href="./css/slides.css" rel="stylesheet">
 
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
     <%= partial "slides/ie_bullshit" %>
 
     <script type="text/javascript" src="http://use.typekit.com/lyq7joq.js"></script>
@@ -50,7 +51,6 @@
         }
       </style>
 
-      <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
       <script>
         (function() {
           var doc = document;
@@ -395,68 +395,71 @@
             }
           };
 
-          var numberToName = {};
-          var nameToNumber = {};
-          $(".slide").each(function(index) {
-            numberToName[index+1] = $(this).attr("data-slidename");
-            nameToNumber[$(this).attr("data-slidename")] = index+1;
+          jQuery(window).load(function() {
+            var numberToName = {};
+            var nameToNumber = {};
+            $(".slide").each(function(index) {
+              numberToName[index+1] = $(this).attr("data-slidename");
+              nameToNumber[$(this).attr("data-slidename")] = index+1;
+            });
+
+            // Initialize
+            console.log(query(".slide"))
+            var slideshow = new SlideShow(query(".slide"), numberToName, nameToNumber);
+
+            $(".next").each(function() {
+              var self = $(this);
+
+              // set href hash tag
+              self.attr("href", "#"+ self.parents(".slide:first").nextAll(".slide:first").attr("data-slidename"))
+
+              self.click(function(e) {
+                e.preventDefault();
+                slideshow.next();
+              });
+            })
+
+            // $(".home").click(function(e) {
+            //   e.preventDefault();
+            //   slideshow.go(1);
+            // })
+
+            $(".prev").each(function(e) {
+              var self = $(this);
+
+              // set href hash tag
+              self.attr("href", "#"+ self.parents(".slide:first").prevAll(".slide:first").attr("data-slidename"))
+
+              self.click(function(e) {
+                e.preventDefault();
+                slideshow.prev();
+              });
+            })
+
+            $(".tweet").click(function(e) {
+              e.preventDefault();
+
+              var url = $(this).attr("href");
+
+              var Z = 550,
+              h = 450;
+              var c = screen.height;
+              var b = screen.width;
+              var a = Math.round((b / 2) - (Z / 2));
+              var g = 0;
+              if (c > h) {
+                  g = Math.round((c / 2) - (h / 2))
+              }
+
+              var tweetWindow = window.open(url, "twitter_tweet", "left=" + a + ",top=" + g + ",width=" + Z + ",height=" + h + ",personalbar=no,toolbar=no,scrollbars=yes,location=yes,resizable=yes");
+              if (tweetWindow) {
+                  tweetWindow.focus()
+              } else {
+                  window.location.href = Y
+              }
+            })
+
           });
-
-          // Initialize
-          console.log(query(".slide"))
-          var slideshow = new SlideShow(query(".slide"), numberToName, nameToNumber);
-
-          $(".next").each(function() {
-            var self = $(this);
-
-            // set href hash tag
-            self.attr("href", "#"+ self.parents(".slide:first").nextAll(".slide:first").attr("data-slidename"))
-
-            self.click(function(e) {
-              e.preventDefault();
-              slideshow.next();
-            });
-          })
-
-          // $(".home").click(function(e) {
-          //   e.preventDefault();
-          //   slideshow.go(1);
-          // })
-
-          $(".prev").each(function(e) {
-            var self = $(this);
-
-            // set href hash tag
-            self.attr("href", "#"+ self.parents(".slide:first").prevAll(".slide:first").attr("data-slidename"))
-
-            self.click(function(e) {
-              e.preventDefault();
-              slideshow.prev();
-            });
-          })
-
-          $(".tweet").click(function(e) {
-            e.preventDefault();
-
-            var url = $(this).attr("href");
-
-            var Z = 550,
-            h = 450;
-            var c = screen.height;
-            var b = screen.width;
-            var a = Math.round((b / 2) - (Z / 2));
-            var g = 0;
-            if (c > h) {
-                g = Math.round((c / 2) - (h / 2))
-            }
-
-            var tweetWindow = window.open(url, "twitter_tweet", "left=" + a + ",top=" + g + ",width=" + Z + ",height=" + h + ",personalbar=no,toolbar=no,scrollbars=yes,location=yes,resizable=yes");
-            if (tweetWindow) {
-                tweetWindow.focus()
-            } else {
-                window.location.href = Y
-            }
-          })
 
         })();
       </script>
