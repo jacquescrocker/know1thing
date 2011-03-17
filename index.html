@@ -1,0 +1,2405 @@
+<!DOCTYPE html>
+<!--
+  Copyright 2010 Google Inc.
+
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+
+  Original slides: Marcin Wichary (mwichary@google.com)
+  Modifications: Ernest Delgado (ernestd@google.com)
+                 Alex Russell (slightlyoff@chromium.org)
+                 Brad Neuberg
+-->
+<html>
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <meta charset="utf-8" />
+    <title>If I would have known just one thing...</title>
+    <link href="http://fonts.googleapis.com/css?family=Droid+Sans|Droid+Sans+Mono" rel="stylesheet" type="text/css" />
+    <link type="text/css" href="./css/slides.css" rel="stylesheet">
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+    <!--[if lt IE 9]>
+  <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js"></script>
+  <script type="text/javascript" src="js/jquery.chrome_frame.js"></script>
+
+  <style type="text/css" media="screen">
+    html, body {
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+    }
+    html, body, .presentation, .slides {
+      overflow: visible;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 900px;
+      height: 700px;
+    }
+    #cover {
+      display: block;
+      margin: auto;
+      visibility: visible;
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      bottom: 0;
+      overflow: visible;
+      width: 900px;
+      height: 700px;
+    }
+
+    .slide {
+      display: none;
+    }
+    .presentation {
+      background: none !important;
+      background-color: #fff !important;
+    }
+
+    #cover .howto {
+      display: none;
+    }
+    #cover .share {
+      margin: auto;
+      left: 0;
+      right: 0;
+    }
+    #cover .next {
+      display: none;
+    }
+    #cover .next.startchromeinstall {
+      display: block;
+    }
+
+    #cover a {
+      border-bottom: none;
+      text-decoration: underline;
+    }
+    #cover .start {
+      padding-top: 20px;
+    }
+    #cover .start .download {
+      float: none;
+      margin: 0 auto;
+      cursor: pointer;
+    }
+    #cover .start .next {
+      display: none;
+    }
+
+    #cover .chromeframe {
+      display: block !important;
+      padding-top:20px;
+    }
+
+    #chrome_msg { display:none; position: fixed; top: 0; left: 0; background: #ece475; border: 2px solid #666; border-top: none; font: bold 11px Verdana, Geneva, Arial, Helvetica, sans-serif; line-height: 100%; width: 100%; text-align: center; padding: 5px 0; margin: 0 auto; }
+    #chrome_msg a, #chrome_msg a:link { color: #a70101; text-decoration: none; }
+    #chrome_msg a:hover { color: #a70101; text-decoration: underline; }
+    #chrome_msg a#msg_hide { float: right; margin-right: 15px; cursor: pointer; }
+    * html #chrome_msg { left: auto; margin: 0 auto; border-top: 2px solid #666;  }
+
+    .chromeFrameInstallDefaultStyle {
+      z-index: 9999;
+      position: absolute;
+      border: 5px solid #999;
+      width: 800px;
+      height: 400px;
+      left: 50px;
+      top: 150px;
+    }
+  </style>
+
+  <script type="text/javascript" charset="utf-8">
+    $(document).ready(function(){
+      $(".next").click(function(e){
+        e.preventDefault();
+
+        var confirmation = confirm("This slide show requires an HTML5 capable browser. You could just download the PDF... better yet, let's get your browser updated so you can experience the web the way it was meant to be. Click OK to continue the install and in a few seconds you'll be ready to rock!");
+        if (confirmation) {
+            window.open('http://www.google.com/chromeframe/eula.html', 'CFWindow', 'menubar=no,width=800,height=450,toolbar=no,scrollbars=yes')
+        }
+
+      })
+    })
+  </script>
+
+<![endif] -->
+
+
+    <script type="text/javascript" src="http://use.typekit.com/lyq7joq.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+  </head>
+  <body>
+    <div class='presentation'>
+  <div class='slides'>
+    <style type="text/css" media="screen">
+    #cover {
+      text-align: center;
+      background-image: url(css/cover_bg.jpg);
+      background-repeat: none;
+    }
+    
+    #cover .top {
+      margin: 20px 30px;
+      background-image: url(css/about_bg.png);
+      background-repeat: repeat-x;
+      background-position: 0px 12px;
+    }
+    
+    #cover .intro {
+      font-family: "museo-1","museo-2";
+      font-weight: 300;
+      color: #86685f;
+      background-color: #f0ece6;
+      padding: 5px 16px;
+      font-size: 15pt;
+      text-shadow: 1px 1px 0px #fff;
+      margin: 0;
+      display: inline;
+    }
+    
+    #cover .download {
+      background-image: url(css/download_btn.jpg);
+      background-repeat: none;
+      width: 160px;
+      height: 260px;
+      text-indent: -99999px;
+      border: 0;
+    
+      position: absolute;
+      left: 0;
+      top: 216px;
+    
+      outline: none;
+    }
+    
+    #cover .next {
+      background-image: url(css/next_btn.jpg);
+      background-repeat: none;
+      width: 160px;
+      height: 260px;
+      text-indent: -99999px;
+      border: 0;
+    
+      position: absolute;
+      right: 0;
+      top: 216px;
+    
+      outline: none;
+    }
+    
+    #cover .share {
+      margin: 0;
+      position: absolute;
+      left: 18px;
+      bottom: 19px;
+    
+      color: #86685f;
+      font-family: "museo-1","museo-2", serif;
+      font-weight: 300;
+      font-size: 14pt;
+    }
+    #cover .share a {
+      border: none;
+      font-weight: 700;
+      color: #503932;
+    }
+    
+    #cover .howto {
+      margin: 0;
+      position: absolute;
+      right: 14px;
+      bottom: 8px;
+      width: 225px;
+      height: 31px;
+      background-image: url(css/howto_bg.jpg);
+      background-repeat: no-repeat;
+    
+      font-family: "museo-sans-1","museo-sans-2", sans-serif;
+      font-weight: 500;
+      color: #5d3b31;
+      font-size: 10pt;
+      padding-top: 11px;
+    }
+    </style>
+    
+    <div id="cover" class="slide" data-slidename="cover">
+    
+      <div class="top">
+        <p class="intro">30 leaders. 1 page each. Enjoy.</p>
+      </div>
+    
+    
+      <a href="./If-I-would-have-known-just-1-thing.pdf" class="download">Download PDF</a>
+    
+      <!--[if lt IE 9]>
+        <a href="http://www.google.com/chromeframe" class="next startchromeinstall">Start Reading</a>
+      <![endif]-->
+    
+      <a href="#mac" class="next">Start Reading</a>
+    
+      <p class="share">
+        Please pass this along!
+    
+        <a href="http://twitter.com/?status=Reading%20an%20awesome%20ebook%20%22If%20I%20would%20have%20known%20just%20one%20thing%22%20Read%20it%20free%20-%3E%20http://bit.ly/9zBRHA">Tweet it</a>
+        or
+        <a href="http://www.facebook.com/sharer.php?u=http://ifiwouldhaveknownjustonething.com/&t=If%20I%20would%20have%20known%20one%20thing...">share it on facebook.</a>
+      </p>
+    
+      <p class="howto">
+        Use the arrow keys to navigate
+      </p>
+    
+    </div>
+    <style type="text/css" media="screen">
+      #mac0 header {
+      }
+    
+      #mac0 section {
+        font-size: 14.5pt;
+      }
+    
+      #mac0 section p {
+        margin-bottom: 0.7em;
+      }
+    
+    </style>
+    
+    <div id="mac0" class="slide know" data-slidename="mac">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        The Unexpected
+      </header>
+      <details>
+        By Shane Mac
+      </details>
+      <section>
+        <p>We spend much of our lives doing what is asked of us. Doing what we are told. Doing what others expect.</p>
+        <p>Doing the expected will usually get you the expected outcome. Whether it be business, career, friendship or just giving a helping hand when asked.</p>
+        <p>Stop.</p>
+        <p>Now think about everything you could do that people wouldn't expect. A simple hello to a stranger. A card to a friend. A helping hand when not asked. A birthday call 3 days early. A compliment for no reason. A pair of shoes to the needy. The list is endless.</p>
+        <p>The unexpected is how you create true emotional connections with people and in return can bring about fulfillment. The smile you will get when someone doesn't expect something is completely different than when they do.</p>
+        <p>Go do something unexpected. Now.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Shane Mac post ideas and projects at <a href="http://shanemac.me">http://shanemac.me.</a> His book, Stop With The BS, is coming out Fall 2010.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Shane%20Mac)&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #wambaugh1 header {
+        background-color: #00a59d;
+      }
+      #wambaugh1 p{
+        font-size: 12.50pt;
+      }
+    </style>
+    
+    <div id="wambaugh1" class="slide know" data-slidename="wambaugh">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>Forest Ranger</header>
+      <details>
+        By Abby Wambaugh
+      </details>
+      <section>
+        <p><strong>I wish I had known all my options</strong> before begininng my career. Most of us graduate from high school with a limited view of the career options available. Then suddenly we’re thrust into college, left to pick a direction from day one, to set our future in motion.</p>
+        <p>I spent a year living in England after I graduated from high school, then suddenly I was back in the states at college orientation. I had a mild panic attack when they set me in front of a computer and told me to pick classes based on my degree path. Aren’t you supposed to be counseling me in this degree path? Maybe others had a better experience than me - maybe their career test in the 8th grade yielded results other than park ranger.</p>
+        <p>It was a crooked road that lead me to public relations. I thought I would like my choice. I was good at it. I had fantastic internships –landed a wonderful first job. I was the lead spokesperson for an internationally recognized brand by age 24, but I didn’t enjoy it. Now I’m left discovering what’s next for me. I wish I had known and explored all my options. I wish someone had told me that my personality needs to be intellectually challenged and doesn’t thrive in a corporate environment.</p>
+        <p>I believe it often takes us a while to find our niche, and sometimes the crooked road we take is the best road possible. All this to say, know your options, seek wise counsel and don’t ever feel rushed into a decision that will impact the rest of your life.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Abby Wambaugh is a marketing manager for a major transportation company.
+          She <a href="http://twitter.com/abbyannette">tweets</a>, <a href="http://abigailwambaugh.com/">writes</a> and loves the mountains.
+          She is not currently a park ranger.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Abby%20Wambaugh)&via=abbyannette&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #swenson2 header {
+        text-align:center;
+        background-color:#8e2b7a;
+        padding-left:50px;
+        padding-right:50px;
+      }
+      #swenson2 header span {
+        font-size:18pt;
+        line-height:1em;
+        margin-bottom:1px;
+        margin-top:-3px;
+      }
+    
+      #swenson2 section {
+        margin-top: 111px;
+      }
+    
+      #swenson2 section p{
+        font-size:11pt;
+        display:block;
+        margin-top: 0px;
+        margin-bottom: 11px;
+      }
+    
+      #swenson2 section ul {
+        margin-top: -4px;
+        margin-bottom: 8px;
+      }
+    
+      #swenson2 section ul li {
+        padding: 3px 10px;
+      }
+    
+    </style>
+    
+    <div id="swenson2" class="slide know" data-slidename="swenson">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Give Your All, <span>but relax</span>
+      </header>
+      <details>
+        by Andrew Swenson
+      </details>
+      <section>
+        <p><strong>It felt like I had swallowed a live mouse.</strong> On the table was:</p>
+        <ul>
+          <li>a contract worth roughly $600,000</li>
+          <li>a contract that could make or break our tiny agency’s budget</li>
+          <li>a contract that represented months of hard work</li>
+          <li>a contract my VP and I were finally presenting after six(!) hours of meetings</li>
+          <li>a contract that I had personally written. Every word.</li>
+        </ul>
+    
+        <p>In the worst dip of our recession, it was a contract we needed.
+        Our firm had already endured layoffs, and as two of the primary drivers of business development (me in mar- keting and my VP in sales), we felt responsible. It’s sickening to know that the quality of your work could cost someone their livelihood down the line. Our potential client took it, smiled, and walked us to the door. They had to talk about it one last time. I should have been filled with agony.</p>
+        <p>But I wasn’t.</p>
+        <p>For weeks I let pressure consume me, keep me up at night, give me stress migraines. But at last I had peace. I knew that I had done the best I could. Whatever decision they made was beyond my control.</p>
+        <p>If I would have known just one thing, it would have been to relax earlier. Whether you’re worried about keeping your job, getting that promotion, or landing a client, things are either going to work out or they won’t. You give what you can give, and if it’s not good enough, chances are you’re more resilient than you think you are.</p>
+        <p>And as for the client? They accepted. Turns out giving our all was good enough.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Andrew Swenson is a marketing strategist, communication specialist, believer of youth in biz and lover of indie rock. He blogs at <a href="http://wordpost.org">wordpost.org</a> and tweets <a href="http://www.twitter.com/wordpost">@wordpost</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Andrew%20Swenson)&via=wordpost&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #gunnell3 header {
+        text-align:center;
+        background-color:#c03335;
+        color: #fff;
+      }
+      #gunnell3 section {
+        margin-top: 93px;
+      }
+      #gunnell3 section p{
+        font-size:10pt;
+        display:block;
+      }
+    </style>
+    
+    <div id="gunnell3" class="slide know" data-slidename="gunnell">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Benefits of Play.
+      </header>
+      <details>
+        By Tamee Gunnell
+      </details>
+      <section>
+        <p>You can learn more about a person in an hour of play than a year of conversation - Plato</p>
+        <p>There are things that we did as children that we don’t do as adults – and for good reason. As we grow we learn and become more capable, mature members of society. But something else happens along the way. We lose our sense of wonder. We lose our sense of “what if?” We lose much of our creative ability as we are programmed to “color inside the lines.” We’ve become adults and somehow our memory of how much we learned from playing seems to vanish. We get attached to titles, power and money and the simple joys of life get all muddled up in the process. We go to our jobs. We become responsible and quickly forget the benefits that come from taking time out to play.</p>
+        <p><strong>Remember when...</strong> Play usually involves other people. And, when we play with those we work with, it creates those “remember when” moments. It’s those bonding moments that open the door to seeing each other not just as “work” associates but as human beings. Our personalities come out while we create memories.<p>
+        <p><strong>Soul Food...</strong> Playing is fun. Fun reduces stress. Reduced stress restores optimism. Optimism leads to joy. People like joyful people. Pretty simple.</p>
+        <p><strong>Right brain boost...</strong> Curiosity. Imagination. Creativity. All benefits of play.</p>
+        <p><strong>True colors...</strong> A person’s true character comes out when put in competitive situations. Playing with others often involves competition of some event. If you want to get a glimpse of the character of your coworkers, go out and play with them.</p>
+        <p><strong>Think differently...</strong> Play enhances neural connections that enable various solutions to divergent problems. In simple terms, play promotes creative problem solving. It opens up wonder. It turns the impossible to possible. Play allows us to see the opportunities in everyday elements.</p>
+        <p>These are just a few of the benefits of play. Ultimately, play is as much a state of mind as it is a state of being. It’s about loosening up and not taking ourselves so seriously. <strong>Now go out and have some fun!</strong></p>
+      </section>
+      <footer>
+        <div class="about">
+          <a href="http://www.linkedin.com/in/tameeg">Tamee</a> is a Strategic Planning professional focusing on creating marketing programs of all sizes. Her natural curiosity makes for interesting experiences and stories.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Tamee%20Gunnell)&via=tameeg&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #eubanks4 header {
+        text-align:center;
+        background-color:#bf7a04;
+      }
+      #eubanks4 section p{
+        font-size:12pt;
+        display:block;
+      }
+      #eubanks4 section span p{
+        margin-left:100px;
+      }
+    </style>
+    
+    <div id="eubanks4" class="slide know" data-slidename="eubanks">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Work for Free
+      </header>
+      <details>
+        By Ben Eubanks
+      </details>
+      <section>
+        <p>Want to hear a secret way you can get experience, build your professional network, and open your- self up to new opportunities? <strong>All you have to do is work for free.</strong> Check out this example, starring one of my friends in the lead role.</p>
+        <span><p>Chuck was a PR pro who had been on the job market for months. He looked over his resume and decided that a bit more experience managing a large PR project would round out his qualifications.</p>
+        <p>So he went to his local animal shelter and spoke with the director. The director agreed to let Chuck develop an organization-wide campaign, and it turned out to be a smashing success. Shortly afterward, the director was able to refer Chuck to a colleague who had also seen the PR campaign.</p>
+        <p>She hired him on the spot as her team lead.</p></span>
+        <p>This story details what I mean when I say <strong>"work for free."</strong> It's not slave labor or busy work. It's not that the value/quality of work is poor. It's a concerted effort by a professional to use their knowledge and skills for the benefit of others. You’re doing pro bono consulting. It helps you build your resume, enhance your skill set, and assist an organization that couldn't do it alone.</p>
+        <p>Find an organization with a problem that you can solve and offer to do it for free. You’ll be surprised at what you can do, who you can help, and how it benefits both parties in the long run.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Ben Eubanks is an HR professional & blogger from north Alabama. He enjoys writing about leadership, HR, & zombies. Find him on <a href="http://twitter.com/beneubanks">Twitter,</a> <a href="http://www.linkedin.com/in/beneubanks">LinkedIn,</a> or <a href="http://upstarthr.com/">UpstartHR.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Ben%20Eubanks)&via=beneubanks&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #andrus5 header {
+        text-align:center;
+        background-color:#41387A;
+        color:#fff;
+      }
+      #andrus5 header span.first {
+        vertical-align: 20px;
+      }
+      #andrus5 header span.mid {
+        font-size:20pt;
+        vertical-align: 18px;
+      }
+      #andrus5 header span.last {
+        vertical-align: -6px;
+      }
+      #andrus5 section {
+        margin-top: 126px;
+        font-size: 13pt;
+      }
+    
+    </style>
+    
+    <div id="andrus5" class="slide know" data-slidename="andrus">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        <span class="first">Mistakes</span>
+        <span class="mid">are</span>
+        <span class="last">Valuable</span>
+      </header>
+      <details>
+        By Beth Andrus
+      </details>
+      <section>
+        <p><strong>I wish I knew,</strong> from the beginning, that mistakes are a good thing. For years my mistakes would make me cringe and retreat. Now, when I realize I've made a mistake, I'm grateful. I know I'll be smarter than before, as soon as I find the lesson in it.
+        <p>I recently came across evidence of a huge mistake I had made years ago. It cost me a lot of time and money, but I had forgotten about it. But the lessons I learned were not forgotten. They had become a part of me and changed how I approach everything. I was so much further ahead because of my enormous screw-up, but I didn't realize it at the time. I felt embarrassed and just saw what I thought was wasted time and money.</p>
+        <p>Sometimes the only way to find out what you don't know is to jump in and see what happens. If you're lucky, you'll hit some bumps in the road. That's how you'll know you've stepped outside your boundary. The more you fail, the more you learn, and the more you learn, the more you grow. Mistakes will move you quickly down the road, further than you imagined, as long as you keep your head up. I would rather fall while moving forward, than stand tall in one spot. Now I know I need to embrace my mistakes.</p>
+        <p>Accept your mistakes, and soon you may even decide to celebrate them.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Beth Andrus wrote <a href="http://theessentialbusinesshandbook.com/">The Essential Business Handbook</a> and writes a <a href="http://www.minibizbuzz.com/">blog</a> for very small businesses.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Beth%20Andrus)&via=beth_andrus&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #mccann6 header {
+        font-size:20pt;
+        text-align:center;
+        background-color:#4E7F89;
+        color:#fff;
+      }
+      #mccann6 header span {
+        font-size:13pt;
+        margin: -5px 0;
+      }
+      #mccann6 section {
+        font-size:10.5pt;
+      }
+    </style>
+    
+    <div id="mccann6" class="slide know" data-slidename="mccann">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Building the Muscles of Success<br /><span>and the</span>
+        Value of Persistence
+      </header>
+      <details>
+        By T.A. McCann
+      </details>
+      <section>
+        <p><strong>Almost nothing works the way you planned it out of the gate.</strong> In fact, most success is found after trying and failing many times over. In an interview with Thomas Edison soon after he discovered the carbon filament that led to the modern light bulb he commented, “I have not failed, not once. I’ve discov- ered ten thousand ways that don’t work.” Persistence toward the goal and a confidence to try again is the key.</p>
+        <p>I was fortunate enough to be involved with winning sailing’s 1992 Americas Cup. We started the campaign with certain ideas on ways we could innovate in boat design, construction and even concepts about inventing a new kind of sailcloth made of carbon fiber. The early iterations exploded minutes after we put them up. Failure. The next generations became brittle when we folded them, so they worked well once, but not twice. We iterated. Next versions broke down quickly in the sun and lost their shape, so we added a unique form of sunscreen.  After almost 18 months of trialing, the final versions were delivered days before the Cup, where a decided boat-speed advantage trounced the competition. Hard fought success!</p>
+        <p>It seems obvious to make it actionable. But measuring your success is critical. Count the number of days you are the last one to leave the office. Always do the extra credit problems. Take on a responsibility with a high chance of failure or where you have very little background or experience at least once every 3 months. Ask for a task that is way above your skill level. Attempt to meet with people who have 10X your experience. When everyone else has left the pool, do another lap or two. This persistence will pay off in many ways. You feel like you did more, others see that you did more and that indicates that you want to succeed, more. You will be building the mental endurance to persist as your ambition becomes larger, the challenges greater and the amount of failure, regrouping and trying again, more frequent. Success is about muscles, mental, physical or both. Persistence and iteration is the time in the gym to build them. The more you train, the stronger you get and gain the confidence to overcome and succeed.</p>
+      </section>
+      <footer>
+        <div class="about">
+          T.A. McCann is founder and CEO of <a href="http://gist.com">Gist.</a> His is an active startup advisor to companies including Zooppa and Wishpot and founder of Jump2Go, HelpShare and Soft Labour. T.A. has also won sailing’s America’s Cup and sailed around the world and is active in several environmental causes. <a href="http://tamccann.blogspot.com">http://tamccann.blogspot.com</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20T.A.%20McCann)&via=tamccann&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    
+    
+    <style type="text/css" media="screen">
+      #miceli07 header {
+        background-color:#DB5821;
+        color:#fff;
+      }
+    
+      #miceli07 section {
+        font-size: 13.5pt;
+      }
+    
+    </style>
+    
+    <div id="miceli07" class="slide know" data-slidename="miceli">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Look Ahead Early
+      </header>
+      <details>
+        By Carlos Miceli
+      </details>
+      <section>
+        <p><strong>If there was one thing</strong> I wish I'd known as a naive kid or impetuous teenager, it would be that it's never too early to look into the future. Having fun and enjoying the present are the results of a well led life, but never an ultimate goal, because those that seek immediate gratification are the ones that don't respect time and its unavoidable regrets.</p>
+        <p><strong>I wish I knew</strong> that the rebellious passion of the early years can be lost forever, leaving you with wisdom but without energy to use it. With time I realized that fulfillment comes from creation and not from spending, because despite the fact that laughter, tears, lies, frustrations and love shared with your first friends and enemies are beautiful memories, they are nothing compared to the pleasure that construction (with all of its sweat and pain) brings to the prepared mind that appreciates a finished product over fleeing bursts of happiness.</p>
+        <p>No immediate gain comes close to the growth that a person can experience by overcoming life's real hardships.</p>
+        <p><strong>The contentment of sharing</strong> the knowledge acquired after choosing to fight early battles, instead of resting on tradition, surpasses anything that a single short-term moment will provide.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Young Argentinian philosopher <a href="http://twitter.com/CarlosMic">Carlos Miceli</a> is the co-founder and Content Director of <a href="http://untemplater.com/">Untemplater,</a> the guide to shatter the template lifestyle, and the mastermind behind <a href="http://www.owlsparks.com/">OwlSparks.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Carlos%20Miceli)&via=CarlosMic&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #spark08 header {
+        background-color:#20246A;
+        color: #fff;
+      }
+    
+      #spark08 header span {
+        display:inline-block;
+        font-size:19pt;
+        line-height:0.75em;
+        margin:0 -15px;
+        text-align:center;
+        width:100px;
+        vertical-align:-6px;
+      }
+    
+      #spark08 section {
+        margin-top: 96px;
+      }
+    
+    </style>
+    
+    <div id="spark08" class="slide know" data-slidename="spark">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Never <span>write a</span> Resume
+      </header>
+      <details>
+        By David Spark
+      </details>
+      <section>
+        <p>With so many online publishing and distribution outlets, why does anyone still write 1-page resumes?</p>
+        <p>A resume:</p>
+        <p><span>Gives a potential employer permission to qualify you through their front desk receptionist.
+        Forces you to be creative within a box.
+        Announces how many years you held a job.
+        Doesn't tell a story.
+        Requires you to be beholden to a standardized accreditation system.
+        Prevents you from becoming an entrepreneur.</span></p>
+    
+        <p>I stopped updating my resume four years ago. I wish I had never written a resume.</p>
+        <p>Instead:</p>
+         <p><span>List your job experience on a LinkedIn profile and ask your past and current colleagues to
+         Write a recommendation.
+         Write a bio of your past experiences.
+         Write a blog about the job you want to have. Interview people in that space.
+         Reach out to influencers in your space. Read and comment on their blog. Send them private notes.
+         Extend personal invitations for parties, or just a lunch.
+         Recognize when you're experiencing a moment that must be captured as a story. Write it and share it on
+         your blog. When you're really good at recognizing them, you can start capturing them on video as they're happening.</span></p>
+         <p>Entrepreneurs never got their job from a great resume.  Be creative about telling your story, and share it with the people you want to work with and for.</p>
+      </section>
+      <footer>
+        <div class="about">
+          David Spark refuses to show you his resume. Instead, read his bio, check out his business site, <a href="http://www.davidspark.com/">Spark Media Solutions,</a> or read his blog, <a href="http://www.sparkminute.com/">Spark Minute.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20David%20Spark)&via=dspark&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #price09 header {
+        background-color:#0F4D29;
+        color:#fff;
+      }
+    
+    </style>
+    
+    <div id="price09" class="slide know" data-slidename="price">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Make Decisions
+      </header>
+      <details>
+        By Michele Price
+      </details>
+      <section>
+        <p><strong>Each day is far more powerful</strong> and holds boundless opportunities, once you have made a decision. Knowing how critical and empowering making a decision, even if it scares the crap out of you, is what I would have given my teeth for in my youth. We often think that making a "good" decision means taking time, weighing the pros and cons... being careful that we make a "good one".</p>
+        <p>What a crock.</p>
+        <p>All that time is giving our lizard brains (that thing that fears change and desires safety) a chance to kick into gear. And it stops you in your tracks. You let yourself feel better because the majority of people you trust tell you, " You can't rush a good decision", and you numb yourself into paralysis in order to play safe, in the name of "good decisions".</p>
+        <p><strong>Decide in an instant.</strong> You’ll know the answer in your gut. All fears are empty. It’s your ego jacking you up. Take a breath, get quiet (many have never quieted their minds, ever). Start with a small decision (less risk), make your choice, and strengthen your decision muscles. Soon, you will make decisions faster.</p>
+        <p><strong>If I would have known this,</strong> I would have decided faster and move forward with more speed and assurance. Are you ready?</p>
+        <p>Your life is waiting for that decision.</p>
+      </section>
+      <footer>
+        <div class="about">
+          <a href="http://www.twitter.com/prosperitygal">Michele Price,</a> <a href="http://socialmediaforsmartpeople.com/speaking-michele-price/">Social Media Mindset Speaker</a>-radio host on <a href="http://www.whoismicheleprice.com/">Breakthrough Business Strategies.</a><br /> Co-author Minding Your Manners in Social Media.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Michele%20Price)&via=prosperitygal&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #schaefer10 header {
+        background-color:#CF1C20;
+        color:#fff;
+      }
+      #schaefer10 section {
+        margin-top: 105px;
+        font-size: 10pt;
+      }
+    
+      #schaefer10 section p {
+        margin-bottom: 0;
+        margin-top:4px;
+      }
+    
+    </style>
+    
+    <div id="schaefer10" class="slide know" data-slidename="schaefer">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+    Friends in High Places
+      </header>
+      <details>
+       By Mark W. Schaefer
+      </details>
+      <section>
+        <p><strong>In the long-run, it’s who you know.</strong></p>
+        <p>You can only get so far on your own intellect and instincts. All things being equal, the person with the best network and most influential mentors will fly higher ... and get there faster.</p>
+        <p>Effective and powerful mentors can mean much more to you than occasional job leads. Friends in high places can be sources for investment capital, help you navigate the political minefield, promote your personal brand, serve as business advisers, and introduce you to potential business partners and customers.</p>
+        <p>Most importantly, mentors can help crunch the learning curve and facilitate that all-important business advantage of SPEED.</p>
+        <p><strong>Action items: Find a mentor</strong></p>
+        <p>In the era of the social web, there is really no excuse for not having an effective network of sponsors. The trick is getting their attention. It’s easy to find successful and experienced individuals in your field of work. Now get on their radar screen by asking questions, commenting on their blog, connecting to them on Twitter.</p>
+        <p>Read the business section of your local newspaper, trade journal or industry websites. Watch for news of the movers and shakers in your line of work. When an article appears, compliment them on it and ask if it would be possible to meet or talk to them about their achievements.</p>
+        <p>If you work for a large corporation, look at an org chart and find the ultimate job you want to have some day. Ask the person to go to lunch with you and ask them, “How can I be you some day?” That is the ultimate compliment and will certainly get their attention!</p>
+        <p>If somebody asks you, “Can you help me?” ... would you say no? Simply ask a potential mentor for help on a business problem. Most people are kind and will feel flattered that you want their help.</p>
+        <p>Finally, have LOTS of mentors and communicate with them regularly. Learn as much as you can from a diverse group of people. You just never know what the benefits can be down the line.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Mark W. Schaefer serves as Chief Marketing Officer to several companies and is a consultant and college educator. His popular blog {grow} can be found at <a href="http://www.businessesGROW.com/blog">www.businessesGROW.com/blog.</a> Connect to him on Twitter at <a href="http://www.twitter.com/markwschaefer">@markwschaefer.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Mark%20W.%20Schaefer)&via=markwschaefer&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #wasiak11 header {
+        background-color:#43A337;
+        font-size:24pt;
+        letter-spacing:0;
+        line-height:1.1em;
+        padding:0 12px;
+        text-align:center;
+        word-spacing:1px;
+        color:#fff;
+      }
+    
+      #wasiak11 section {
+        margin-top:104px;
+      }
+    
+      #wasiak11 section strong {
+        display:block;
+        font-size:14pt;
+        margin-top:29px;
+      }
+    
+    </style>
+    
+    <div id="wasiak11" class="slide know" data-slidename="wasiak">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Be a Resilient Opportunity Advocate<br />
+        Rather than a Relentless Problem Solver
+      </header>
+      <details>
+        By Hank Wasiak
+      </details>
+      <section>
+        <p>As an advertising person who started my career in the Mad Men era of the 1960’s I spent most of my time helping clients avoid or solve problems. I grew up with SWOT analyses that wound up identifying significantly more weaknesses and threats than strengths and opportunities. The most widely used advertising genres utilized classic problem solution formats. We spent endless amounts of time and money funding test markets to cover the downside risks of marketing programs. I spent most of my time on the problem side of the ledger. And why not. Solving problems usually yielded timely and tangible results. Problem solvers were the first to get a pat on the back for a job well done. The problem with a problem fixation is that it usually just protects the status quo and, at best, winds up being a zero sum game.</p>
+        <p>All in all, I’ve been blessed to have a very good life and pretty successful career. And, I can only imagine.... How much could I have accomplished if I spent most of my time seeking out, evaluating and seizing opportunities? How many more inspiring relationships could I have developed if I spent most of my time discovering the potential in people rather than seeing their shortcomings? How many more exciting discoveries could I have made if I spent most of my time taking opportunistic risks?</p>
+        <p>The good news is that we all have the power to be resilient opportunity advocates. It’s a mindset choice anyone can make.</p>
+        <p><strong>What are you waiting for?</strong></p>
+      </section>
+      <footer>
+        <div class="about">
+          Hank retired as Vice Chairman of McCann-Erickson to co-found the creative hot shop, The Concept Farm. He is a three-time Emmy award winning TV host, author, keynote speaker, teacher and a Reiki Master. <a href="http://www.hankwasiak.com/">http://www.hankwasiak.com/</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Hank%20Wasiak)&via=hankwasiak&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #markow12 header {
+        background-color:#2C4E8E;
+        color:#fff;
+      }
+      #markow12 section {
+        font-size: 14pt;
+      }
+    
+    </style>
+    
+    <div id="markow12" class="slide know" data-slidename="markow">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Scuttle the Boats
+      </header>
+      <details>
+        By Jason Markow
+      </details>
+      <section>
+        <p><strong>Hernando Cortez did something bold.</strong></p>
+        <p>The story goes that upon arriving in Mexico he destroyed any chance of returning/retreating/abandoning his goal. Most commonly, the story is told that he torched all 11 of the boats that he and his crew arrived on. This is a common misconception, what he actually did is "scuttle" (intentionally sink) them.</p>
+        <p>He left himself (and his crew) no escape route, no retreat, no other option.</p>
+        <p>If you want to go "above and beyond" and position yourself for a huge success you need to eliminate any potential escape route.</p>
+        <p>I am not saying that failure is not possible. It is. To be honest, the chance of failure will most likely increase. However, it is failure that shows we are pushing ourselves, it is failure that shows we have attempted something great, and it is from failure that we truly learn.</p>
+        <p>This does not mean "attempt while unprepared"! It means prepare to the best of your ability, sever any chance of retreat, and go for it. So show up, scuttle the boats, and take action... because it is the only choice you've got.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Jason is the creator of <a href="http://jasonmarkow.com/">‘The think (here) Blog’,</a> co-founder of <a href="http://thinkcoremedia.com/">Think Core Media.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jason%20Markow)&via=jmarkow&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #strimpel13 header {
+        background-color:#D07524;
+      }
+      #strimpel13 section {
+        font-size: 11.5pt;
+        margin-top: 104px;
+      }
+      #strimpel13 section p {
+        margin-top:0;
+      }
+    </style>
+    
+    <div id="strimpel13" class="slide know" data-slidename="strimpel">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Learn to Love Learning
+      </header>
+      <details>
+        By Jason Strimpel
+      </details>
+      <section>
+        <p>Simply loving to learn in itself is not exactly useless, but unless there is a resurgence in thinking as a viable career choice, it's pretty close.</p>
+        <p>I interview all kinds of people on an ongoing basis. I ask the tough questions like "what is the sum of the numbers 1 through 100, inclusive?" and also the off-the-wall questions like "if you were a bird, which bird would you be"? These types of questions serve many purposes to the interviewer (albeit mysterious to those trying to answer) but the traits I always look for are passion and an intense curiosity and willingness to learn.</p>
+        <p>When I speak to someone with a passion for what they do, it is immediately apparent. As a hiring manager in an intensely competitive environment, passion speaks louder than any qualification, job experience, or GPA. Passion is the edge that sets those that are hired at JPMorgan apart from those that are not.</p>
+        <p>So how does one obtain such a deep passion for what they do? Learn to love learning. Undergraduates come out of college with a passion for the unknown. They are excited to start life and make money. However, employers have been through this. We want a person that has a genuine passion for the work they are going to do.</p>
+        <p>Now, I'm not saying that you need work 60 plus hours per week or spend all your free time reading textbooks on variance swaps (like me). However, surround yourself with your passion by reading books and Websites, talking to people, and joining clubs. Do whatever it takes to study or work within the field.</p>
+        <p><strong>Develop a deep love for learning and the passion will follow.</strong></p>
+      </section>
+      <footer>
+        <div class="about">
+          Section Manager at JPMorgan Chase & Co., Master's Degree student in Quantitative Finance, human being, derivatives trader, brother, son, and all around really nice guy. <a href="http://www.jasonstrimpel.com">http://www.jasonstrimpel.com.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jason%20Strimpel)&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #howver14 header {
+        background-color:#CE6697;
+      }
+    
+      #howver14 section {
+        font-size:12pt;
+      }
+    
+      #howver14 section p {
+        margin-top: 10px;
+        margin-bottom: 17px;
+      }
+    
+    </style>
+    
+    <div id="howver14" class="slide know" data-slidename="howver">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Be With People
+      </header>
+      <details>
+        By Jen Howver
+      </details>
+      <section>
+        <p><strong>People have always been an important part of my life.</strong> I am, after all, an extreme extrovert. And when I worked for businesses, even small companies, I had enough people around me to give me energy, make me laugh, and challenge me personally and professionally.</p>
+        <p>However, since starting my own business nearly five years ago, I have somehow let the importance of actually being with people slip down in my list of priorities.</p>
+        <p>In my past life, working in a cubicle, I had friends from work who I’d hang out with after hours to play cards, have some drinks, and laugh a lot. I was able to seek out mentors within the company who I could learn from, and it was easy to schedule a lunch meeting and be intentional about our time together.</p>
+        <p>Things have changed a lot since I decided to start working from my house and for myself. It became easy to go inside my own little world and to stop being intentional about people. But over the past five years, I wish I‘d reminded myself about all these things I once took for granted.</p>
+        <p>So whether you’re striking out on your own to build the next great business, or you’re sitting in a cubicle being annoyed by the music choice of your neighbor, being with people is important. You need to surround yourself with friends who will laugh with you, and mentors or peers who will spur you on to greater things. Be intentional about it.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Jen Howver is owner of <a href="http://www.vodcommunications.com/">VOD Communications,</a> which provides marketing, copywriting, and social media consulting. She’s also a busy wife, mom, and aspiring novelist.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jen%20Howver)&via=jenhowver&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #blake15 header {
+        color: #fff;
+        background-color:#269C38;
+        padding-left:50px;
+        padding-right:50px;
+      }
+    
+      #blake15 section {
+         margin-top: 89px;
+       }
+      #blake15 ul {
+        margin-top: -9px;
+      }
+      #blake15 ul li {
+        margin: 0 0 0 13pt;
+        padding: 3px;
+        padding-bottom: 0px;
+        list-style: disc;
+      }
+    
+    </style>
+    
+    <div id="blake15" class="slide know" data-slidename="blake">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Don’t Wait
+      </header>
+      <details>
+        By Jenny Blake
+      </details>
+      <section>
+        <p><strong>If I had known just one thing at the beginning of my career,</strong> it would have been not to delay my happiness by waiting for other people to give me what I wanted. The snippets of advice that follow are about taking charge of your own life and career – and most importantly, your attitude.</p>
+        <ul>
+          <li>Don't wait for other people to make you happy.</li>
+          <li>Don't wait for your manager to ask you what you need.</li>
+          <li>Don't wait for your job to become fulfilling on its own.</li>
+          <li>Don't wait for your work/life balance to magically settle where you want it.</li>
+          <li>Do get crystal clear on what you want.</li>
+          <li>Figure out what makes you happy through trial and error.</li>
+          <li>Focus on your strengths and grow them.</li>
+          <li>Pay attention to when you feel most “in the zone” and do more of it.</li>
+          <li>Build your job and career like a pyramid instead of a ladder.</li>
+          <li>Collect as many lessons and experiences as you can – good and bad.</li>
+          <li>Keep what works and magnify it.</li>
+          <li>Find ways to grow what works into something bigger.</li>
+          <li>Not 100% satisfied with your fulltime job?</li>
+          <li>Start something on the side. Today.</li>
+          <li>Stop delaying your happiness until tomorrow.</li>
+          <li>Above all, commit to being a leader in your own life.</li>
+          <li>Commit to taking charge.</li>
+          <li>Commit to you making yourself happy - in life and work.</li>
+          <li>No one else is going to do it for you.</li>
+        </ul>
+      </section>
+      <footer>
+        <div class="about">
+          <a href="http://twitter.com/jenny_blake">Jenny</a> blogs at <a href="http://lifeaftercollege.org">http://lifeaftercollege.org,</a> where she shares practical tips for life, work, money, happiness, personal growth, productivity and more. She works full-time at Google as a Career Development Program Manager and coach.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jenny%20Blake)&via=jenny_blake&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #landers16 header {
+        color: #fff;
+        background-color:#3274AD;
+      }
+      #landers16 header span {
+        margin: 0 -10px;
+        font-size:25pt;
+      }
+      #landers16 section {
+        font-size: 11pt;
+      }
+    
+    </style>
+    
+    <div id="landers16" class="slide know" data-slidename="landers">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Passions <span>are</span> Contagious
+      </header>
+      <details>
+        By Jody Landers
+      </details>
+      <section>
+        <p>Movements that change the world arise out of passions, out of hearts captured by causes worth doing. Passion-captured people act. They don’t wait for approval or resources or an official position. Passions ignite dreams, they stir up voices of protest, they cause people to come together to make “what should be” into “what is.”</p>
+        <p>Our passion is for clean water. Our hearts were captured by the reality that every day mothers are burying their children because they drank contaminated water. We found that unacceptable, especially when clean water lies beneath the surface. We realized that clean water could change everything for these mothers. This idea became a driving force for an increasing number of passion-driven volunteers.</p>
+        <p>Passion has power that isn’t rooted in celebrity, economic status or prestige.</p>
+        <p>We paid attention to our tears. We explored them. We allowed ourselves to take on the suffering of others; to feel their pain. We opened the doorways of our hearts to the discovery of passion--and the passion took over. And we began to act.</p>
+        <p>So, when a cause captures your heart, when you can’t talk about something without tearing up...move. Act. Be bold. The smarts will come.</p>
+        <p>Mark Batterson suggests reframing “Ready, Set, Go” to “Go, Set, Ready.” Passion comes first. Education follows and helps sustain.</p>
+        <p>Don’t go alone. Along the way, take the time and energy to build a team. You can move faster alone but you will go much farther together. Community sustains us in the action, it even becomes a reward in itself. Nothing beats the “pursuit of a great cause in the company of friends.”</p>
+      </section>
+      <footer>
+        <div class="about">
+          Jody Landers: Makes a home in Colorado with her husband and six children. Volunteer clean water advocate/director of <a href="http://www.water4christmas.com/">Water For Christmas.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jody%20Landers)&via=jodyrlanders&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #loayza17 header {
+        background-color:#0F4D29;
+      }
+    
+      #loayza17 section {
+        font-size:  11pt;
+        margin-top: 96px;
+      }
+    
+    
+    </style>
+    
+    <div id="loayza17" class="slide know" data-slidename="loayza">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Be The Tortoise
+      </header>
+      <details>
+        By Jun Loayza
+      </details>
+      <section>
+        <p><strong>Impatience used to be my middle name.</strong></p>
+        <p>On the macro level, I quit my corporate job after 3 months to pursue my startup full time. On the micro level, I used to check my email while driving, at the gym, and at dinner with my girlfriend.</p>
+        <p>I thought waiting was for losers; I believed winners vigorously took what they deserved instead of waiting for it to come to them.</p>
+        <p>If only I had known that patience is one of the entrepreneur’s most important traits.</p>
+        <p>It may not seem like it, but a young twenty something has all the time in the world to accomplish his or her goals.</p>
+        <p>Emails can wait - enjoy the time that you spend with your loved ones. The startup can wait – value the learning experience at your corporate job.</p>
+        <p>Be patient and focus on being the very best at what you’re currently doing. There is no award for “best multi-tasker” or “most productive person in the world.”</p>
+        <p>Yes, you are in a race, a race against your peers, your competitors, and a race to make a positive difference in this world.</p>
+        <p>But you don’t need to be the hare; be the tortoise.</p>
+        <p>The entrepreneur who succeeded after his 3rd startup wins, just like the entrepreneur on his 9th startup. The only difference is that the latter has many more bumps, scars, and bruises.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Jun Loayza is the President of <a href="http://socialmediamarketing.com/">SocialMediaMarketing.com</a> and the Co-Founder of <a href="http://viralogy.com/">Viralogy.</a> Find Jun on his <a href="http://junloayza.com/">Blog</a> or contact him through <a href="http://twitter.com/JunLoayza">Twitter.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Jun%20Loayza)&via=JunLoayza&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #chevy18 header {
+        background-color:#4AAE92;
+      }
+    
+      #chevy18 section {
+        font-size: 13pt;
+      }
+    
+    </style>
+    
+    <div id="chevy18" class="slide know" data-slidename="chevy">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Ask Questions
+      </header>
+      <details>
+        By Matt Chevy
+      </details>
+      <section>
+        <p><strong>If I would have known just one thing</strong> it would have been to shut up, listen, and ask a ton of questions.</p>
+        <p>Asking questions provides you with a gateway to knowledge, surrounding yourself with people who are smarter than you (and believe me, they are out there, and there’s no doubt people who are smarter than them) and asking them how they do what they do, is the only way you and I will ever learn anything.</p>
+        <p>Admitting you don't know everything, admitting you’re not invincible...that's half the battle - that's where most of get stuck. We're proud, we think we know everything, and we're not willing to admit when we don't...</p>
+        <p>But if there is just one thing to take away from this, it's that you don't know everything, and that asking questions is the hands down absolute best way to get where you want to be; personally AND professionally.</p>
+        <p>Being stubborn has held me back in the past, safe to say it has you as well - don't let it anymore. In today's world, people are willing to help - you just have to be willing to ask for it.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Matt Cheuvront is the founder of <a href="http://mattchevy.com/">MattChevy.com</a> and Master of Ceremonies at <a href="http://www.lifewithoutpants.com/">Life Without Pants.</a> Follow him on <a href="http://twitter.com/mattchevy">Twitter</a> to keep in touch!
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Matt%20Chevy)&via=mattchevy&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #obrien19 header {
+        background-color:#27377A;
+        font-size:31pt;
+        line-height:1.05em;
+        padding:6px 28px;
+        text-align: center;
+      }
+    
+      #obrien19 section {
+        margin-top: 134px;
+      }
+    </style>
+    
+    <div id="obrien19" class="slide know" data-slidename="obrien">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        What’s Your Company’s
+        <br />
+        Personality
+      </header>
+      <details>
+        By Monica O’Brien
+      </details>
+      <section>
+        <p><strong>One of the most interesting bits of research</strong> that people rarely write about is how much influence founder personalities can have on a company. I've worked with start-ups and small businesses for several years, and the difference between whether I like the company or not almost always correlates directly to how much I like the founder, or the face of the company.</p>
+        <p>Surprisingly, this phenomenon isn't only apparent in new companies. Apple, for example, completely emulates Steve Jobs' personality in every single product - from computers to iPods to cell phones. You can guess a lot about the culture and work ethic at Apple just by meeting Steve Jobs himself.</p>
+        <p>Many people want to work at start-ups, and I'm often asked for advice on whether a start-up is the right move or not. To really know, listen to your gut when you meet the company founder. Do you like the person? If not, you will almost surely hate working for the company, no matter how perfect the job suits your skill set.</p>
+        <p>This doesn't just go for start-ups. All companies have personalities. The most successful companies stay true to that personality in all facets of their existence - in every tweet, in every ad campaign, in every product, and yes - in every employee too.</p>
+      </section>
+      <footer>
+        <div class="about">
+          <a href="http://monicaobrien.com/">Monica O'Brien</a> is the author of Social Pollination, which provides a strategic blueprint that helps businesses find their personality on social media. For a limited time, purchase <a href="http://www.amazon.com/gp/product/0984234802">Social Pollination</a> to get a free membership to Monica's premium consulting site where she provides individual and group consulting.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Monica%20O%E2%80%99Brien)&via=monicaobrien&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #abdulhadi20 header {
+    
+      }
+      #abdulhadi20 section {
+        font-size: 13pt;
+      }
+    
+    </style>
+    
+    <div id="abdulhadi20" class="slide know" data-slidename="abdulhadi">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Walk Differently
+      </header>
+      <details>
+        By Mouyyad Abdulhadi
+      </details>
+      <section>
+        <p><strong>I have worked in customer service since I was 14 years old.</strong> I have interacted with the hungry, the sick and a modern combination of the two, those with cellular service issues. I have talked to the old and young, people of all races and colors, from all parts of the world. In my years of customer service I have come to a conclusion: it’s difficult, stressful, mentally taxing and most of all REWARDING.</p>
+        <p>When one thinks about “customers,” we picture the lady at the drive thru, the man in front of you at the bank, the person paying for gas, etc. We fail to realize that “customers” are a part of every aspect of our lives. Family members are customers. Friends are customers. Co-workers are customers. In a way, we all work in customer service.</p>
+        <p>To succeed, there are certain mental bumpers we must place so we do not fall in the customer service gutter. We must be a sieve, which allows all the negatives to go through but leaves the gold. We must take the important parts of what the customer is telling us and transform it into a great experience. We cannot take everything the customer says personally, but have enough emotional attachment to want to help the customer. In customer service, the destination is equally as important as the journey; it was long and arduous, yet a customer leaving with a smile is the sight of land after the months at sea, the light at the end of the tunnel.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Mouyyad Abdulhadi, Dallas, Texas, entrepreneurship is my passion, my dream is to live a global lifestyle, avid reader, <a href="http://www.magiccarpetblog.com/">www.magiccarpetblog.com</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Mouyyad%20Abdulhadi)&via=MouyyadA&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #hangen21 header {
+        background-color:#185170;
+        color: #fff;
+        font-size:31pt;
+        line-height:1.00em;
+        padding:6px 90px;
+        text-align: center;
+      }
+    
+      #hangen21 section {
+        margin-top:123px;
+        font-size: 11.5pt;
+      }
+    
+    </style>
+    
+    <div id="hangen21" class="slide know" data-slidename="hangen">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Customer Service<br />
+        Destination
+      </header>
+      <details>
+        By Nathan Hangen
+      </details>
+      <section>
+        <p><strong>The problem with a traditional education</strong> is that you are expected to work on your own. Students are rarely given the opportunity to work in groups to pair strengths and weaknesses, and as a result, they wind up relying on themselves...never really learning how to network and collaborate.</p>
+        <p>As a result, many people develop what I call “silent perfectionism,” which in ordinary terms means that someone doesn’t trust others to get things done right. I’m one of these types, and I spent most of my adult life busting my tail in order to try to achieve everything on my own.</p>
+        <p>To make matters worse, the modern social web actually increases the problem because people begin to spend less time hanging out in physical locations and more time hanging out on Twitter or Facebook. Chatting on Facebook is great, but it doesn’t come anywhere close to replacing real, physical connections.</p>
+        <p>There’s power in shaking hands and hanging out with people over a cup of coffee or a beer. There’s a certain type of synergy that can be achieved when you work on problems with others, instead of on your own.</p>
+        <p>People might forget avatars on Twitter, but they generally don’t forget a face, and although social media relationships can be powerful, personal relationships can be so much more.</p>
+        <p>When you have the chance, make an effort to exchange handshakes instead of emails. Sure, I’ve formed some great partnerships online, but those that I formed in person have been, by far, the most beneficial to my business.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Nathan Hangen is an <a href="http://nathanhangen.com/">entrepreneur,</a> <a href="http://beyond-blogging.net/">author,</a> and <a href="http://makingitsocial.com/">online marketing strategist.</a> You can follow him on Twitter at <a href="http://www.twitter.com/nhangen">(@nhangen).</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Nathan%20Hangen)&via=nhangen&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+    
+      #antrim22 header {
+        background-color:#741449;
+        color:#fff;
+    
+        letter-spacing:-1px;
+        padding:12px 24px;
+      }
+      #antrim22 header span {
+        font-size:25pt;
+        letter-spacing:0;
+        margin:0 -10px;
+        word-spacing:0;
+      }
+    
+    
+      #antrim22 section {
+        font-size: 11.5pt;
+      }
+    
+    </style>
+    
+    <div id="antrim22" class="slide know" data-slidename="antrim">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Commitment <span>to the</span> Process
+      </header>
+      <details>
+        By Patrick Antrim
+      </details>
+      <section>
+        <p><strong>THE PROCESS</strong> is defined as a collection of actions that allow a person to progress toward a desired result.</p>
+        <p>Immediate as well as lifetime achievements are the culmination of successfully executed maneuvers in succession over an extended period of time.</p>
+        <p>The road towards understanding ourselves and the infinite possibilities lay in the experience of the process. The major lessons in life are in the failures we experience along the journey towards our true potential. Personal accomplishment is generated by focus on action with intention. It is necessary to observe our goals and ambitions in order to formulate a plan. Not all streams have stones for you to cross on. Staying focused on each step will allow for the necessary end result: To get where we want to go.</p>
+        <p>In the forum of athletics, athletes and coaches often dream of being hoisted on shoulders in celebration. Very few dream of the sacrifices that it will take to get there. Only when we attend to the achievement of daily objectives will we understand the endless opportunities our efforts provide.</p>
+        <p>Successful people remember the strain filled times when they finally moved beyond their challenge, and designate those events as being why they achieved their goals.</p>
+        <p>Life teaches us that the moments collected, the miles traveled, and the time absorbed will yield the life we want.</p>
+        <p>Commit to the PROCESS until you find yourself amongst your results. If you do not work the process you can never achieve those results. What will you commit to?</p>
+      </section>
+      <footer>
+        <div class="about">
+          Patrick Antrim Jr. is a retired Professional Athlete with the New York Yankees an Investment Real Estate Advisor and Entrepreneur who is passionate about leadership, development, and people. Find him at <a href="http://www.patrickantrim.com">http://www.patrickantrim.com</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Patrick%20Antrim)&via=patrickantrim&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #mcderment23 header {
+        background-color:#9B4B23;
+        color:#FFFFFF;
+        word-spacing:0;
+      }
+      #mcderment23 section {
+        font-size: 13pt;
+      }
+    </style>
+    
+    <div id="mcderment23" class="slide know" data-slidename="mcderment">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Play To Your Strengths
+      </header>
+      <details>
+        By Mike McDerment
+      </details>
+      <section>
+        <p><strong>What makes people like Warren Buffet and Bill Gates so successful?</strong></p>
+        <p>I don't have all the details, but I know part of the puzzle - they play to their strengths. In 2003 I started a business in my parents’ basement that helped me avoid paperwork (invoicing), and is now used by over a million people. Along the way I realized that when I don't like a task, it's like pulling teeth and I become less inspired and effective, but when I truly enjoy what I am doing, not only am I more efficient, but the task at hand is virtually effortless.</p>
+        <p>I soon discovered that there are people who love to do the things I hate to do. You may not believe it, but trust me - it's true. Knowing this, I focus on the tasks that play to my strengths and pass the tasks I loathe to someone who loves them. Case in point; I used to prepare reports for my board members. I always hated doing it - it took me too long and made my head snow. One day, one of my board members said, "You know, you can get someone else to do that". That blew my mind. All I really needed to do was focus on the part I was good at (outlining what needed to be in the report), and hand off the report preparation to someone who gets fired up accomplishing just such a task.</p>
+        <p>Today, I'm surrounded by people whose strengths compliment my own. So we're not just getting more done, we are loving every minute of it. Can you think of anyone who would enjoy preparing your reports?</p>
+      </section>
+      <footer>
+        <div class="about">
+          Mike McDerment is the CEO of <a href="http://www.freshbooks.com">FreshBooks,</a> planet Earth's leader in online billing and bookkeeping.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Mike%20McDerment)&via=MikeMcDerment&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #dematteo24 header {
+    
+      }
+    
+    
+    
+    </style>
+    
+    <div id="dematteo24" class="slide know" data-slidename="dematteo">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        The Power of Happy Hour
+      </header>
+      <details>
+        By Rich DeMatteo
+      </details>
+      <section>
+        <p>We spend more time with co-workers than anyone else in our lives. Whether we love them or hate them, we need to find ways to work effectively with team members. But why should it stop there?</p>
+        <p>Connections built early in our career can set us up for future opportunities and success. Finding out the passions and goals of co-workers presents an opportunity to learn if we have matching interests. While the work place is not the best spot for conversations like this, happy hour is.</p>
+        <p>When you start a new job, it’s only a matter of time before someone invites you to happy hour. You MUST go to happy hour. No ifs, ands, or buts. Turning down an invite reduces the chances you’ll be asked to come out with the group next time. If employees at your company don’t normally go out together, then step up and organize a group outing.</p>
+        <p>When you get there, focus on having fun, and sharing some laughs. Once you reach a point where you call your colleagues “work friends”, then start opening up about your passions and goals. While these connections will benefit your career in the short term, you’ll be amazed to see how long the bond lasts.</p>
+        <p>Very early in my career I made the mistake of avoiding happy hour. Don’t make that mistake. Eventually, I smartened up and made incredible connections with brilliant people. Those team outings dramatically impacted my career and crucial business decisions that I make on a day-to-day basis. And that, my friends, is the power of happy hour.</p>
+      </section>
+      <footer>
+        <div class="about">
+          <a href="http://twitter.com/cornonthejob">Rich DeMatteo</a> is a Philadelphia area HR/Staffing professional and creator of <a href="http://www.cornonthejob.com/">Corn On The Job,</a> a job search, recruiting, and HR blog.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Rich%20DeMatteo)&via=cornonthejob&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #ogborn25 header {
+        background-color:#27387A;
+        color:#FFFFFF;
+        font-size:33pt;
+        letter-spacing:0px;
+        padding:10px 20px;
+        word-spacing:0;
+      }
+      #ogborn25 section {
+        font-size: 13.5pt;
+      }
+    </style>
+    
+    <div id="ogborn25" class="slide know" data-slidename="ogborn">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Casting a Thousand Nets
+      </header>
+      <details>
+        By Samantha Ogborn
+      </details>
+      <section>
+        <p><strong>I’ve heard it all.</strong> No, really, I’ve heard it all. The economy is at an all-time low, no places are hiring, etc. Keep going. In the meantime, someone just landed a job at your dream company.</p>
+        <p>If I had known just one thing, it would be that casting a thousand nets and staying relentlessly proactive will get you to where you want to be in life.
+        When was the last time you got offered a job in the midst of inactivity? Oh wait, that never happened. That’s because jobs don’t land themselves. The first step to reeling in that big opportunity is to stop whining, and start doing.</p>
+        <p>Strive to push past the idea that the perfect job is out of your reach. It’s only out of your reach if you believe it to be so. Times like these call for your indispensable passion to overcome your convincing excuses.</p>
+        <p><strong>Basically: how bad do you want it?</strong></p>
+        <p>Go big, or go home. Don’t apply to one; apply to all. And while you’re at it, remember that you never get anywhere in life if you don’t try in the first place. Let determination reign, then go out there and make it yours.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Samantha went big and landed a full-time job with Fuor Digital following her graduation from the University of Missouri School of Journalism in May 2010. Find her on <a href="http://twitter.com/SJOgborn">Twitter</a> or at her <a href="http://www.samanthaogborn.com/">blog.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Samantha%20Ogborn)&via=SJOgborn&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #deblauwe26 header {
+        background-color:#CE0545;
+        color:#FFFFFF;
+        font-size:25pt;
+        letter-spacing:0;
+        line-height:1em;
+        padding:10px 14px;
+        text-align:left;
+        word-spacing:-1px;
+      }
+    
+      #deblauwe26 section p {
+        margin-top: 7px;
+        margin-bottom: 7px;
+      }
+    
+      #deblauwe26 section {
+        margin-top: 110px;
+        font-size:11.25pt;
+      }
+    
+    </style>
+    
+    <div id="deblauwe26" class="slide know" data-slidename="deblauwe">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Success is:<br />Collaborate, Collaborate, Collaborate!
+      </header>
+      <details>
+        By Tony Deblauwe
+      </details>
+      <section>
+        <p>Early in my career I thought the only way I could climb the corporate ladder was by proving I was the best in a given job role. I learned very quickly that without others to help you collaborate you won’t ever achieve true success.</p>
+        <p>A mentor once quoted St. Augustine to me:</p>
+        <p><span>"The sufficiency of your merit is to know that your merit is not sufficient."</span></p>
+        <p>Taking this message to heart, I learned how to collaborate better and build win-win solutions. My tips:</p>
+        <p>1. Communicate a shared vision. Clearly outline what you want to accomplish and invite others to provide inputs. Show the value for everyone and how working together around common goals builds win-win solutions.</p>
+        <p>2. Promote the ideas of others. In the process of completing a project or task, find opportunities to cham- pion the contributions of others. People want validation and appreciate being heard and their opinions supported.</p>
+        <p>3. Accept criticism. If you’re not being as effective as you can be, or you made a bad decision, it’s hard to feedback about how you can improve your style or process. Allowing others to help you be better is a good thing, so embrace it and apply the guidance.</p>
+        <p>4. Mentor others. Always find opportunities to help others be successful. Share your experience to push people to be their best. Mentoring is the ultimate form of collaboration where you can influence others to shine, and help them reach their goals and vision of success.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Tony Deblauwe is a workplace expert and author of the award-winning book, Tangling with Tyrants: Managing the Balance of Power at Work. Visit <a href="www.workbabble.com.">www.workbabble.com.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Tony%20Deblauwe)&via=HR4Change&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #byrd27 header {
+        background-color:#592970;
+        color: #fff;
+        font-size: 35pt;
+        padding: 10px 17px
+      }
+    
+      #byrd27 section {
+        font-size:13.5pt;
+      }
+    
+    </style>
+    
+    <div id="byrd27" class="slide know" data-slidename="byrd">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        The Trickle Makes a River
+      </header>
+      <details>
+        By Brett Byrd
+      </details>
+      <section>
+        <p><strong>Building a brand starts with a trickle.</strong> The trickle is the beginning of the stream you put in motion that will determine how the river will flow and eventually end up. Everything you do as leader, whether positive or negative, will trickle down into the fabric of your company. If done positively, your organization may grow at an alarming rate. On the contrary, if done negatively, you will tear down your organization faster than class 5 rapids.</p>
+        <p>Your influence and the actions displayed by people in leadership positions will ultimately decide the fate of the company. The river can only flow smoothly without any boulders in its path. Be smart and make sure to trickle down only the habits that will make other partners, directors, employees, consumers and even competitors, like your brand. Those who lead by dictating find not only stones in their path, but many being thrown. You can be certain that those stones being thrown will cause ripples in the water.</p>
+        <p>So remember, there are three parts to a river: one - the trickle that sets the river in motion, two - the body that is the essence of the river and three - The Mouth.</p>
+        <p>Need I say more?</p>
+      </section>
+      <footer>
+        <div class="about">
+          Brett Byrd, spent 18 years in the Hospitality Industry and currently is top in sales for <a href="http://www.imaginethispromo.com/">Imagine This,</a> a large promotional marketing company. Brett is also founder of the 501(c)3 non-profit <a href="http://www.giveyoursole.com/">Give Your Sole.</a>
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Brett%20Byrd)&via=PROMOBYRD&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #krzastek28 header {
+        background-color:#8F3722;
+        color: #fff;
+      }
+      #krzastek28 section {
+        font-size:13pt;
+      }
+    </style>
+    
+    <div id="krzastek28" class="slide know" data-slidename="krzastek">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Stay Organized
+      </header>
+      <details>
+        By Marcus Krzastek
+      </details>
+      <section>
+        <p><strong>Organization is the last thing</strong> I would have imagined myself recommending to people 7 months ago. I'm the type of person who, in college, would buy one single subject notebook to take (almost non-existent) notes for all of my classes, and then stuff all my papers in the front and back so it doubled as a folder. I never had a need to organize so I never became organized.</p>
+        <p>When I began work at Vaynermedia, and especially on Crush It, that attitude was put to the test. It didn't take long for it to fail. If you're truly "crushing it" and working your ass off, you're going to have a lot of things on your plate. Even more importantly, you'll have people depending on your ability to move quickly and intelligently. In order to do so, you need to have some kind of system in place.</p>
+        <p>This doesn't mean just go and copy a random organization scheme off of Lifehacker. Everyone works and thinks differently, you need to play with a bunch of options and find what works best for you. Personally, I use a combination of Gmail labels, Google Calendar, and Toodledo to handle my day to day schedule, but there are a near-infinite amount of alternatives.</p>
+        <p>This may not be the sexiest tip but it's guaranteed to make you more effective at achieving your goals and ultimately make you feel more in-control.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Marcus Krzastek is a project manager for <a href="http://www.vaynermedia.com/">Vaynermedia,</a> a brand consulting agency based in New York City.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Marcus%20Krzastek)&via=MarcusKRZ&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    
+    <style type="text/css" media="screen">
+      #schmitz29 header {
+        font-size:31pt;
+        letter-spacing:-1px;
+        line-height:1em;
+        padding:8px 68px;
+        text-align:center;
+        word-spacing:-1px;
+      }
+    
+      #schmitz29 section {
+        font-size:14pt;
+        margin-top:131px;
+      }
+    
+    </style>
+    
+    <div id="schmitz29" class="slide know" data-slidename="schmitz">
+      <hr class="top" /><hr class="left"/><hr class="corner" />
+      <header>
+        Many of our Limitations<br />are Self Imposed
+      </header>
+      <details>
+        By Wes Schmitz
+      </details>
+      <section>
+        <p><strong>When I first started out, I was always so nervous</strong> going into face-to-face meetings, conference calls, Chamber of Commerce events, or even casual happy hours, because I assumed that each of the other participants was a master of their trade. I felt I was less knowledgeable than anyone else in the room, and was afraid of looking stupid. Given that I was starting down a brand new career path I felt like a “rookie.” I didn’t know anyone, and was uncomfortable striking up a conversation; I was afraid I might ask a dumb question, or not know the right answers if I was asked a question.</p>
+        <p>After months of planning our restaurants, working with our real estate team, area developers, and our general contractors, I quickly realized how much I really knew (and sometimes, how much they didn’t!). I simply wasn’t giving myself enough credit. My perceived lack of knowledge was the only thing holding me back. My unique set of skills and experiences were valuable in their own right, and at the very least allowed me to make informed assumptions about business and business practices.</p>
+        <p>Looking back, I should have been more confident from the start, less shy, and eager to engage in situations/conversations outside my comfort zone.</p>
+      </section>
+      <footer>
+        <div class="about">
+          Wes Schmitz owns a <a href="http://froots.com/home.html">Froots franchise</a> in Austin, TX.
+        </div>
+      </footer>
+      <nav>
+      <div class="title home">If I would have known just one thing...</div>
+      <a href="#" class="prev">Previous Slide</a>
+      <a href="#" class="next">Next Slide</a>
+    
+      
+          <a href="http://twitter.com/share?url=http://ifiwouldhaveknownjustonething.com/&text=If%20I%20would%20have%20known%20just%20one%20thing...%20(by%20Wes%20Schmitz)&via=WesMoneyTX&related=sayhellothere,shanemacsays" class="tweet">Tweet this Slide</a>
+        
+    
+    </nav>
+    
+    
+    
+    </div>
+    <style type="text/css" media="screen">
+    #end {
+      text-align: center;
+    }
+    #end * {
+    }
+    #end .thanks {
+      font-size: 90pt;
+      margin-top: 10px;
+      margin-bottom: 25px;
+      display: block;
+      /*font-family: Museo700;*/
+      font-family: "museo-1","museo-2", serif;
+      font-weight: 700;
+    
+    }
+    #end .stuff {
+      font-size: 24pt;
+      margin-top: 23px;
+      margin-bottom: 25px;
+      font-family: "museo-1","museo-2", serif;
+      font-weight: 700;
+    
+    }
+    #end a {
+      font-weight: bold;
+      font-size: 14pt;
+      border-bottom-width: 4px;
+    }
+    
+    #end p {
+      font-size: 14pt;
+      line-height:1.5em;
+      margin-bottom:1em;
+    }
+    
+    #end .hellothere {
+    
+    }
+    
+    </style>
+    <div id="end" class="slide" data-slidename="end">
+      <div class="thanks">Thank you</div>
+    
+      <div class="stuff">
+        Please share this book.<br />
+        Give it to anyone.<br />
+        Now, go do something awesome.
+      </div>
+    
+      <p class="about">
+        Book concept by <a href="http://shanemac.me">Shane Mac</a><br />
+        His book, <i>Stop With The BS - Time To Get Real With Business and Careers</i>, will be out this Fall.<br />
+        Join Shane on
+        <a href="http://twitter.com/shanemacsays">Twitter</a> or
+        <a href="http://facebook.com/shanemacsays">Facebook</a>
+        for a chance to win a free copy of his book.
+      </p>
+    
+      <p class="about">HTML slide design by
+        <a href="http://www.sachagreif.com/">Sacha Greif</a>
+      </p>
+    
+      <p class="about">
+        Book edited by
+        <a href="http://minibizbuzz.com/">Beth Andrus</a>
+      </p>
+    
+      <p class="about">
+        PDF Cover by <a href="http://mcsimov.net/">Max McSimov</a>
+      </p>
+    
+      <p class="about">PDF layout by
+        <a href="http://twitter.com/colbywg">Colby Gergen</a>
+      </p>
+    
+      <!-- <p class="about">HTML5 Slides modified from <a href="http://code.google.com/p/html5-slides/">html5-slides</a>.
+       </p> -->
+    
+      <p class="about">
+        Source code for this slideshow is on <a href="http://github.com/railsjedi/know1thing">Github</a>
+      </p>
+    
+      <p class="hellothere">
+        <a href="http://sayhellothere.com">Say Hello There</a> for your next job
+      </p>
+    </div>
+  </div>
+</div>
+
+
+    <!--[if !IE]><!-->
+      <style type="text/css" media="screen">
+        .typekit-badge {
+          left: 0 !important;
+          top: 0 !important;
+          bottom: 0 !important;
+          transform: rotate(-90deg);
+          -moz-transform: rotate(-90deg);
+          -webkit-transform: rotate(-90deg);
+          margin: auto 0 !important;
+          margin-left: -18px !important;
+        }
+      </style>
+
+      <script>
+        (function() {
+          var doc = document;
+          var disableBuilds = true; //true;
+
+          var ctr = 0;
+          var spaces = /\s+/, a1 = [""];
+
+          var toArray = function(list) {
+            return Array.prototype.slice.call(list||[], 0);
+          };
+
+          var byId = function(id) {
+            if (typeof id == "string") { return doc.getElementById(id); }
+            return id;
+          };
+
+          var query = function(query, root) {
+            if (!query) { return []; }
+            if (typeof query != "string") { return toArray(query); }
+            if (typeof root == "string"){
+              root = byId(root);
+              if(!root){ return []; }
+            }
+
+            root = root||document;
+            var rootIsDoc = (root.nodeType == 9);
+            var doc = rootIsDoc ? root : (root.ownerDocument||document);
+
+            // rewrite the query to be ID rooted
+            if (!rootIsDoc || (">~+".indexOf(query.charAt(0)) >= 0)) {
+              root.id = root.id||("qUnique"+(ctr++));
+              query = "#"+root.id+" "+query;
+            }
+            // don't choke on something like ".yada.yada >"
+            if (">~+".indexOf(query.slice(-1)) >= 0) { query += " *"; }
+
+            return toArray(doc.querySelectorAll(query));
+          };
+
+          var strToArray = function(s) {
+            if (typeof s == "string" || s instanceof String) {
+              if (s.indexOf(" ") < 0) {
+                a1[0] = s;
+                return a1;
+              } else {
+                return s.split(spaces);
+              }
+            }
+            return s;
+          };
+
+          var trim = function(str) {
+            return str.replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+          };
+
+          var addClass = function(node, classStr) {
+            classStr = strToArray(classStr);
+            var cls = " " + node.className + " ";
+            for (var i = 0, len = classStr.length, c; i < len; ++i) {
+              c = classStr[i];
+              if (c && cls.indexOf(" " + c + " ") < 0) {
+                cls += c + " ";
+              }
+            }
+            node.className = trim(cls);
+          };
+
+          var removeClass = function(node, classStr) {
+            var cls;
+            if (classStr !== undefined) {
+              classStr = strToArray(classStr);
+              cls = " " + node.className + " ";
+              for (var i = 0, len = classStr.length; i < len; ++i) {
+                cls = cls.replace(" " + classStr[i] + " ", " ");
+              }
+              cls = trim(cls);
+            } else {
+              cls = "";
+            }
+            if (node.className != cls) {
+              node.className = cls;
+            }
+          };
+
+          var toggleClass = function(node, classStr) {
+            var cls = " " + node.className + " ";
+            if (cls.indexOf(" " + trim(classStr) + " ") >= 0) {
+              removeClass(node, classStr);
+            } else {
+              addClass(node, classStr);
+            }
+          };
+
+          var ua = navigator.userAgent;
+          var isFF = parseFloat(ua.split("Firefox/")[1]) || undefined;
+          var isWK = parseFloat(ua.split("WebKit/")[1]) || undefined;
+          var isOpera = parseFloat(ua.split("Opera/")[1]) || undefined;
+
+          var canTransition = (function() {
+            var ver = parseFloat(ua.split("Version/")[1]) || undefined;
+            // test to determine if this browser can handle CSS transitions.
+            var cachedCanTransition =
+              (isWK || (isFF && isFF > 3.6 ) || (isOpera && ver >= 10.5));
+            return function() { return cachedCanTransition; }
+          })();
+
+          //
+          // Slide class
+          //
+          var Slide = function(node, idx, slideName) {
+            this._node = node;
+            this._name = slideName;
+            if (idx >= 0) {
+              this._count = idx+1;
+            }
+            if (this._node) {
+              addClass(this._node, "slide distant-slide");
+            }
+            this._makeCounter();
+            this._makeBuildList();
+          };
+
+          Slide.prototype = {
+            _node: null,
+            _name: "",
+            _count: 0,
+            _buildList: [],
+            _visited: false,
+            _currentState: "",
+            _states: [ "distant-slide", "far-past",
+                       "past", "current", "future",
+                       "far-future", "distant-slide" ],
+            setState: function(state) {
+              if (typeof state != "string") {
+                state = this._states[state];
+              }
+              if (state == "current" && !this._visited) {
+                this._visited = true;
+                this._makeBuildList();
+              }
+              removeClass(this._node, this._states);
+              addClass(this._node, state);
+              this._currentState = state;
+
+              // delay first auto run. Really wish this were in CSS.
+              /*
+              this._runAutos();
+              */
+              var _t = this;
+              setTimeout(function(){ _t._runAutos(); } , 400);
+            },
+            _makeCounter: function() {
+              if(!this._count || !this._node) { return; }
+              var c = doc.createElement("span");
+              c.innerHTML = this._count;
+              c.className = "counter";
+              this._node.appendChild(c);
+            },
+            _makeBuildList: function() {
+              this._buildList = [];
+              if (disableBuilds) { return; }
+              if (this._node) {
+                this._buildList = query("[data-build] > *", this._node);
+              }
+              this._buildList.forEach(function(el) {
+                addClass(el, "to-build");
+              });
+            },
+            _runAutos: function() {
+              if (this._currentState != "current") {
+                return;
+              }
+              // find the next auto, slice it out of the list, and run it
+              var idx = -1;
+              this._buildList.some(function(n, i) {
+                if (n.hasAttribute("data-auto")) {
+                  idx = i;
+                  return true;
+                }
+                return false;
+              });
+              if (idx >= 0) {
+                var elem = this._buildList.splice(idx, 1)[0];
+                var transitionEnd = isWK ? "webkitTransitionEnd" : (isFF ? "mozTransitionEnd" : "oTransitionEnd");
+                var _t = this;
+                if (canTransition()) {
+                  var l = function(evt) {
+                    elem.parentNode.removeEventListener(transitionEnd, l, false);
+                    _t._runAutos();
+                  };
+                  elem.parentNode.addEventListener(transitionEnd, l, false);
+                  removeClass(elem, "to-build");
+                } else {
+                  setTimeout(function() {
+                    removeClass(elem, "to-build");
+                    _t._runAutos();
+                  }, 400);
+                }
+              }
+            },
+            buildNext: function() {
+              if (!this._buildList.length) {
+                return false;
+              }
+              removeClass(this._buildList.shift(), "to-build");
+              return true;
+            }
+          };
+
+          //
+          // SlideShow class
+          //
+          var SlideShow = function(slides, numberToName, nameToNumber) {
+            this._slides = (slides||[]).map(function(el, idx) {
+              return new Slide(el, idx, numberToName[idx]);
+            });
+            this.numberToName = numberToName;
+            this.nameToNumber = nameToNumber;
+            var h = window.location.hash;
+            try {
+              var slideHash = h.split('#')[1];
+              this.current = nameToNumber[slideHash];
+            }catch (e) { /* squeltch */ }
+
+            this.current = isNaN(this.current) ? 1 : this.current;
+            var _t = this;
+            doc.addEventListener('keydown',
+                function(e) { _t.handleKeys(e); }, false);
+            doc.addEventListener('mousewheel',
+                function(e) { _t.handleWheel(e); }, false);
+            doc.addEventListener('DOMMouseScroll',
+                function(e) { _t.handleWheel(e); }, false);
+            doc.addEventListener('touchstart',
+                function(e) { _t.handleTouchStart(e); }, false);
+            doc.addEventListener('touchend',
+                function(e) { _t.handleTouchEnd(e); }, false);
+
+            // window.addEventListener('popstate', function(e) {
+            //   _t.go(e.state);
+            // }, false);
+
+            this._update();
+          };
+
+          SlideShow.prototype = {
+            _slides: [],
+            _update: function(dontPush) {
+              if (history.pushState) {
+                if (!dontPush) {
+                  history.pushState(this.current, "Slide " + this.current, "#" + this.numberToName[this.current]);
+                }
+              } else {
+                window.location.hash = this.numberToName[this.current];
+              }
+              for (var x = this.current-1; x < this.current+7; x++) {
+                if (this._slides[x-4]) {
+                  this._slides[x-4].setState(Math.max(0, x-this.current));
+                }
+              }
+            },
+
+            current: 0,
+            nameToNumber: {},
+            numberToName: {},
+            next: function() {
+              if (this._slides[this.current-1] && !this._slides[this.current-1].buildNext()) {
+                this.current = Math.min(this.current+1, this._slides.length);
+                this._update();
+              }
+            },
+            prev: function() {
+              this.current = Math.max(this.current-1, 1);
+              this._update();
+            },
+            go: function(num) {
+              if (history.pushState && this.current != num) {
+                history.replaceState(this.current, "Slide " + this.current, "#" + this.numberToName[this.current]);
+              }
+              this.current = num;
+              this._update(true);
+            },
+
+            _notesOn: false,
+            showNotes: function() {
+              var isOn = this._notesOn = !this._notesOn;
+              query(".notes").forEach(function(el) {
+                el.style.display = (notesOn) ? "block" : "none";
+              });
+            },
+            switch3D: function() {
+              toggleClass(document.body, "three-d");
+            },
+            handleWheel: function(e) {
+              var delta = 0;
+              if (e.wheelDelta) {
+                delta = e.wheelDelta/120;
+                if (isOpera) {
+                  delta = -delta;
+                }
+              } else if (e.detail) {
+                delta = -e.detail/3;
+              }
+
+              if (delta > 0 ) {
+                this.prev();
+                return;
+              }
+              if (delta < 0 ) {
+                this.next();
+                return;
+              }
+            },
+            handleKeys: function(e) {
+
+              if (/^(input|textarea)$/i.test(e.target.nodeName)) return;
+
+              switch (e.keyCode) {
+                case 37: // left arrow
+                  this.prev(); break;
+                case 39: // right arrow
+                case 32: // space
+                  this.next(); break;
+                case 50: // 2
+                  this.showNotes(); break;
+                case 51: // 3
+                  this.switch3D(); break;
+              }
+            },
+            _touchStartX: 0,
+            handleTouchStart: function(e) {
+              this._touchStartX = e.touches[0].pageX;
+            },
+            handleTouchEnd: function(e) {
+              var delta = this._touchStartX - e.changedTouches[0].pageX;
+              var SWIPE_SIZE = 150;
+              if (delta > SWIPE_SIZE) {
+                this.next();
+              } else if (delta< -SWIPE_SIZE) {
+                this.prev();
+              }
+            }
+          };
+
+          jQuery(window).load(function() {
+            var numberToName = {};
+            var nameToNumber = {};
+            $(".slide").each(function(index) {
+              numberToName[index+1] = $(this).attr("data-slidename");
+              nameToNumber[$(this).attr("data-slidename")] = index+1;
+            });
+
+            // Initialize
+            console.log(query(".slide"))
+            var slideshow = new SlideShow(query(".slide"), numberToName, nameToNumber);
+
+            $(".next").each(function() {
+              var self = $(this);
+
+              // set href hash tag
+              self.attr("href", "#"+ self.parents(".slide:first").nextAll(".slide:first").attr("data-slidename"))
+
+              self.click(function(e) {
+                e.preventDefault();
+                slideshow.next();
+              });
+            })
+
+            // $(".home").click(function(e) {
+            //   e.preventDefault();
+            //   slideshow.go(1);
+            // })
+
+            $(".prev").each(function(e) {
+              var self = $(this);
+
+              // set href hash tag
+              self.attr("href", "#"+ self.parents(".slide:first").prevAll(".slide:first").attr("data-slidename"))
+
+              self.click(function(e) {
+                e.preventDefault();
+                slideshow.prev();
+              });
+            })
+
+            $(".tweet").click(function(e) {
+              e.preventDefault();
+
+              var url = $(this).attr("href");
+
+              var Z = 550,
+              h = 450;
+              var c = screen.height;
+              var b = screen.width;
+              var a = Math.round((b / 2) - (Z / 2));
+              var g = 0;
+              if (c > h) {
+                  g = Math.round((c / 2) - (h / 2))
+              }
+
+              var tweetWindow = window.open(url, "twitter_tweet", "left=" + a + ",top=" + g + ",width=" + Z + ",height=" + h + ",personalbar=no,toolbar=no,scrollbars=yes,location=yes,resizable=yes");
+              if (tweetWindow) {
+                  tweetWindow.focus()
+              } else {
+                  window.location.href = Y
+              }
+            })
+
+          });
+
+        })();
+      </script>
+
+    <!-- <![endif]-->
+
+    <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-17950245-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+
+    </script>
+
+  </body>
+</html>
